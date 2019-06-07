@@ -1,0 +1,25 @@
+body {
+    margin: 5%;
+}
+
+.cart {
+    background: teal;
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    left: 90%;
+    top: 0;
+    transform: translateX(-10%);
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    height: 100%;
+}
+
+.packages {
+    width: 30%;
+    height: 50%;
+}
