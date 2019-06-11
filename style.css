@@ -5,8 +5,10 @@ html {
 body {
     height: 100%;
     margin: 5%;
+    height: 100%;
 }
 
+/* Cart area style */
 .cart {
     background: teal;
     height: 100%;
@@ -16,15 +18,18 @@ body {
     top: 0;
     transform: translateX(-10%);
 }
-
+/* Package area style */
 .menu {
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
+    justify-content: space-between;
     height: 100%;
+    padding-right: 10%;
 }
 
 .packages {
     width: 30%;
     height: 30%;
 }
+
