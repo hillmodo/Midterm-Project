@@ -109,76 +109,148 @@ class Package {
 }
 
 
-const testPackage = new Package(
-    "Atlanta",
-    "local",
-    "Southern City",
-    1399,
-    "Business Class Flight",
-    "$199",
-    "Penthouse at the W",
-    "$399",
-    "VIP Club Package",
-    "$350"
-);
+const testPackage = new Package (
+       "Atlanta", 
+       "local", 
+       "Southern City", 
+       1399,
+       "Business Class Flight",
+       199,
+       "Penthouse at the W",
+       399,
+       "VIP Club Package",
+       350
+       );
 
-const testPackage2 = new Package(
-    "Nashville",
-    "local",
-    "Southern City",
-    "$1199",
-    "Business Class Flight",
-    "$199",
-    "Penthouse on Broadway",
-    "$399",
-    "VIP Club Package",
-    "$350"
-);
+const testPackage2 = new Package (
+        "Nashville", 
+        "local", 
+        "Southern City", 
+        1199,
+        "First Class Flight",
+        250,
+        "Penthouse on Broadway",
+        399,
+        "Moonshine Making Package",
+        350
+        );
 
-console.log(testPackage.calculator());
+const testPackage3 = new Package (
+            "Houston", 
+            "local", 
+            "SouthWest City", 
+            1099,
+            "Pilot Seat Flight",
+            199,
+            "Penthouse at UofH",
+            399,
+            "Texans Suite Tickets",
+            350
+            );
+    
 
 
 
 
+let flightCounter = 0;
+let hotelCounter = 0;
+let eventCounter = 0;
 
-
-let packageSelector = document.querySelector(".menu");
+let packageOneSelector = document.querySelector("#container1");
+let packageTwoSelector = document.querySelector("#container2");
+let packageThreeSelector = document.querySelector("#container3");
 
 //Listener on menu container
 //Currently listens to both the select button and the additional option boxes
-packageSelector.addEventListener("click", function(e) {
-    if (e.target.matches('#package-one')) {
 
-        console.log("package one selected");
+packageOneSelector.addEventListener("click", function (e){
+    if(e.target.matches('#package-one')){
         testPackage.displayInCart();
         testPackage.displayAddOnsInPackage("pkg-one-details");
-        console.log(e);
-
 
     }
 
-    if (e.target.matches('#package-two')) {
-        testPackage2.displayInCart();
-        testPackage2.displayAddOnsInPackage("pkg-two-details");
-        console.log(e);
-
-
-
-    }
-
-    if (e.target.matches('#package-three')) {
-        console.log(e);
-        console.log("package three selected");
-
-
-    }
-
-    if (e.target.matches('input[name="flight"]')) {
+    if(e.target.matches('input[name="flight"]') && flightCounter === 0){
         testPackage.AddOnSelected(testPackage.flightAddOn);
         testPackage.displayAddOnsInCart();
+        testPackage.AddOnRemoved(testPackage.flightAddOn);
 
     }
 
+    if(e.target.matches('input[name="hotel"]') && hotelCounter === 0){
+        testPackage.AddOnSelected(testPackage.hotelAddOn);
+        testPackage.displayAddOnsInCart();
+        testPackage.AddOnRemoved(testPackage.hotelAddOn);
+ 
+    }
+
+    if(e.target.matches('input[name="event"]') && eventCounter === 0){
+        testPackage.AddOnSelected(testPackage.eventAddOn);
+        testPackage.displayAddOnsInCart();
+        testPackage.AddOnRemoved(testPackage.eventAddOn);
+        
+    }
+
+
+packageTwoSelector.addEventListener("click", function(e){
+
+    if(e.target.matches('#package-two')){
+        testPackage2.displayInCart();
+        testPackage2.displayAddOnsInPackage("pkg-two-details");  
+    }
+
+    if(e.target.matches('input[name="flight"]') && flightCounter === 0){
+        testPackage2.AddOnSelected(testPackage2.flightAddOn);
+        testPackage2.displayAddOnsInCart();
+        testPackage2.AddOnRemoved(testPackage2.flightAddOn);
+
+    }
+
+    if(e.target.matches('input[name="hotel"]') && hotelCounter === 0){
+        testPackage2.AddOnSelected(testPackage2.hotelAddOn);
+        testPackage2.displayAddOnsInCart();
+        testPackage2.AddOnRemoved(testPackage2.hotelAddOn);
+ 
+    }
+
+    if(e.target.matches('input[name="event"]') && eventCounter === 0){
+        testPackage2.AddOnSelected(testPackage2.eventAddOn);
+        testPackage2.displayAddOnsInCart();
+        testPackage2.AddOnRemoved(testPackage2.eventAddOn);
+        
+    }
+
+});
+
+packageThreeSelector.addEventListener("click", function(e){
+
+    if(e.target.matches('#package-three')){
+        testPackage3.displayInCart();
+        testPackage3.displayAddOnsInPackage("pkg-three-details");
+    }
+
+    if(e.target.matches('input[name="flight"]') && flightCounter === 0){
+        testPackage3.AddOnSelected(testPackage3.flightAddOn);
+        testPackage3.displayAddOnsInCart();
+        testPackage3.AddOnRemoved(testPackage3.flightAddOn);
+
+    }
+
+    if(e.target.matches('input[name="hotel"]') && hotelCounter === 0){
+        testPackage3.AddOnSelected(testPackage3.hotelAddOn);
+        testPackage3.displayAddOnsInCart();
+        testPackage3.AddOnRemoved(testPackage3.hotelAddOn);
+ 
+    }
+
+    if(e.target.matches('input[name="event"]') && eventCounter === 0){
+        testPackage3.AddOnSelected(testPackage3.eventAddOn);
+        testPackage3.displayAddOnsInCart();
+        testPackage3.AddOnRemoved(testPackage3.eventAddOn);
+        
+    }
+
+});
 
 
 });
