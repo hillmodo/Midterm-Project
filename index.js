@@ -1,11 +1,11 @@
 class Package {
-    constructor(name,category,desc,price,flight,flightPrice,hotel,hotelPrice,event,eventPrice){
+    constructor(name, category, desc, price, flight, flightPrice, hotel, hotelPrice, event, eventPrice, subtotal) {
         this.name = name;
         this.category = category;
         this.description = desc;
         this.price = price;
         this.flightAddOn = flight;
-        this.flightAddOnPrice =flightPrice;
+        this.flightAddOnPrice = flightPrice;
         this.flightAddOnSelected = false;
         this.hotelAddOn = hotel;
         this.hotelAddOnPrice = hotelPrice;
@@ -13,87 +13,98 @@ class Package {
         this.eventAddOn = event;
         this.eventAddOnPrice = eventPrice;
         this.eventAddOnSelected = false;
+        this.subtotal = [];
     }
-    
+
     //Displays standard package in cart area
-    displayInCart(){
+    displayInCart() {
         const cartElem = document.querySelector(".cart");
         const selectedCartElem = document.createElement("div");
 
-        selectedCartElem.insertAdjacentText('beforeend', this.name + " "+ this.price);
-        selectedCartElem.insertAdjacentHTML('beforeend','<br>');
-
+        selectedCartElem.insertAdjacentText('beforeend', this.name + " $" + this.price);
+        selectedCartElem.insertAdjacentHTML('beforeend', '<br>');
+        // attempt to push price into subtotal array//
+        this.subtotal.push(this.price);
+        console.log(this.subtotal);
         cartElem.appendChild(selectedCartElem);
 
     }
-    
+
     //Displays  additional package options when standard package is selected
-    displayAddOnsInPackage(detailsID){
+    displayAddOnsInPackage(detailsID) {
         const packageElem = document.getElementById(detailsID);
         const addOnElem = document.createElement("form");
-        
+        addOnElem.className = "addOnForm";
 
-        addOnElem.insertAdjacentHTML('beforeend','<input type="checkbox" name="flight">'+this.flightAddOn+" "+this.flightAddOnPrice+'<br>');
-        addOnElem.insertAdjacentHTML('beforeend','<input type="checkbox" name="hotel">'+this.hotelAddOn+" "+this.hotelAddOnPrice+'<br>');
-        addOnElem.insertAdjacentHTML('beforeend','<input type="checkbox" name="event">'+this.eventAddOn+" "+this.eventAddOnPrice+'<br>');
+        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="flight">' + this.flightAddOn + " " + this.flightAddOnPrice + '<br>');
+        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="hotel">' + this.hotelAddOn + " " + this.hotelAddOnPrice + '<br>');
+        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="event">' + this.eventAddOn + " " + this.eventAddOnPrice + '<br>');
 
         packageElem.appendChild(addOnElem);
     }
 
     //Displays additional package options in cart area
-    displayAddOnsInCart(){
+    displayAddOnsInCart() {
         const cartElem = document.querySelector(".cart");
         const selectedAddOn = document.createElement("div");
 
-        if(this.flightAddOnSelected){
-        selectedAddOn.insertAdjacentText('beforeend', this.flightAddOn + " "+ this.flightAddOnPrice);
-        selectedAddOn.insertAdjacentHTML('beforeend','<br>');
+        if (this.flightAddOnSelected) {
+            selectedAddOn.insertAdjacentText('beforeend', this.flightAddOn + " " + this.flightAddOnPrice);
+            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
         }
-        
-        if(this.hotelAddOnSelected){
-        selectedAddOn.insertAdjacentText('beforeend', this.hotelAddOn + " "+ this.hotelAddOnPrice);
-        selectedAddOn.insertAdjacentHTML('beforeend','<br>');
+
+        if (this.hotelAddOnSelected) {
+            selectedAddOn.insertAdjacentText('beforeend', this.hotelAddOn + " " + this.hotelAddOnPrice);
+            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
         }
-         
-        if(this.eventAddOnSelected){
-        selectedAddOn.insertAdjacentText('beforeend', this.eventAddOn + " "+ this.eventAddOnPrice);
-        selectedAddOn.insertAdjacentHTML('beforeend','<br>');
+
+        if (this.eventAddOnSelected) {
+            selectedAddOn.insertAdjacentText('beforeend', this.eventAddOn + " " + this.eventAddOnPrice);
+            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
         }
 
         cartElem.appendChild(selectedAddOn);
 
     }
-    
-    //Keeps track of which additional package options have been selected
-    AddOnSelected(addOnType){
 
-        if(addOnType === this.flightAddOn){
+    //Keeps track of which additional package options have been selected
+    AddOnSelected(addOnType) {
+
+        if (addOnType === this.flightAddOn) {
+            this.subtotal.push(this.flightAddOnPrice);
             this.flightAddOnSelected = true;
         }
 
-        if(addOnType === this.hotelAddOn){
+        if (addOnType === this.hotelAddOn) {
+            this.subtotal.push(this.hotelAddOnPrice);
             this.hotelAddOnSelected = true;
         }
 
-        if(addOnType === this.eventAddOn){
+        if (addOnType === this.eventAddOn) {
+            this.subtotal.push(this.eventAddOnPrice);
             this.eventAddOnSelected = true;
         }
-        
+
     }
-     
+
     //keeps track of which additional package options have been de-selected
-    AddOnRemoved(addOnType){
-        if(addOnType === this.flightAddOn){
+    AddOnRemoved(addOnType) {
+        if (addOnType === this.flightAddOn) {
             this.flightAddOnSelected = false;
         }
 
-        if(addOnType === this.hotelAddOn){
+        if (addOnType === this.hotelAddOn) {
             this.hotelAddOnSelected = false;
         }
 
-        if(addOnType === this.eventAddOn){
+        if (addOnType === this.eventAddOn) {
             this.eventAddOnSelected = false;
         }
+    }
+
+    calculator() {
+        this.subtotal;
+        console.log(this.subtotal);
     }
 }
 
@@ -151,20 +162,12 @@ let packageThreeSelector = document.querySelector("#container3");
 
 //Listener on menu container
 //Currently listens to both the select button and the additional option boxes
+
 packageOneSelector.addEventListener("click", function (e){
     if(e.target.matches('#package-one')){
         testPackage.displayInCart();
         testPackage.displayAddOnsInPackage("pkg-one-details");
-    }
 
-    if(e.target.matches('#package-two')){
-        testPackage2.displayInCart();
-        testPackage2.displayAddOnsInPackage("pkg-two-details");  
-    }
-
-    if(e.target.matches('#package-three')){
-        testPackage3.displayInCart();
-        testPackage3.displayAddOnsInPackage("pkg-three-details");
     }
 
     if(e.target.matches('input[name="flight"]') && flightCounter === 0){
@@ -187,10 +190,7 @@ packageOneSelector.addEventListener("click", function (e){
         testPackage.AddOnRemoved(testPackage.eventAddOn);
         
     }
-    
 
-    
-});
 
 packageTwoSelector.addEventListener("click", function(e){
 
@@ -253,3 +253,4 @@ packageThreeSelector.addEventListener("click", function(e){
 });
 
 
+});
