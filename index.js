@@ -1,3 +1,5 @@
+let cartArray = [];
+
 class Package {
     constructor(name, category, desc, price, flight, flightPrice, hotel, hotelPrice, event, eventPrice) {
         this.name = name;
@@ -15,6 +17,8 @@ class Package {
         this.isEventAddOnSelected = false;
         this.isPackageSelected = false;
         this.subtotal = [];
+        this.eventAddOnSelected = false;
+
     }
 
     //Displays standard package in cart area
@@ -28,8 +32,8 @@ class Package {
         selectedCartElem.insertAdjacentHTML('beforeend', '<br>');
 
         // attempt to push price into subtotal array//
-        this.subtotal.push(this.price);
-        console.log(this.subtotal);
+        cartArray.push(this.price);
+        console.log(cartArray);
         cartElem.appendChild(selectedCartElem);
 
         
@@ -55,9 +59,10 @@ class Package {
         addOnElem.className = "addOnForm";
 
 
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="flight">' + this.flightAddOn + " " + this.flightAddOnPrice + '<br>');
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="hotel">' + this.hotelAddOn + " " + this.hotelAddOnPrice + '<br>');
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="event">' + this.eventAddOn + " " + this.eventAddOnPrice + '<br>');
+        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="flight">' + this.flightAddOn + " $" + this.flightAddOnPrice + '<br>');
+        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="hotel">' + this.hotelAddOn + " $" + this.hotelAddOnPrice + '<br>');
+        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="event">' + this.eventAddOn + " $" + this.eventAddOnPrice + '<br>');
+
 
         packageElem.appendChild(addOnElem);
     }
@@ -80,23 +85,23 @@ class Package {
         const pkgElem = document.querySelector("#pkg-in-cart");
         const selectedAddOn = document.createElement("div");
 
-        
+
 
         if (addOnType === this.flightAddOn) {
             selectedAddOn.id = "flight-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.flightAddOn + " " + this.flightAddOnPrice);
+            selectedAddOn.insertAdjacentText('beforeend', this.flightAddOn + " $" + this.flightAddOnPrice);
             selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
         }
 
         if (addOnType === this.hotelAddOn) {
             selectedAddOn.id = "hotel-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.hotelAddOn + " " + this.hotelAddOnPrice);
+            selectedAddOn.insertAdjacentText('beforeend', this.hotelAddOn + " $" + this.hotelAddOnPrice);
             selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
         }
 
         if (addOnType === this.eventAddOn) {
             selectedAddOn.id = "event-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.eventAddOn + " " + this.eventAddOnPrice);
+            selectedAddOn.insertAdjacentText('beforeend', this.eventAddOn + " $" + this.eventAddOnPrice);
             selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
         }
         
@@ -131,20 +136,23 @@ class Package {
     AddOnSelected(addOnType) {
 
         if (addOnType === this.flightAddOn) {
+
             this.subtotal.push(this.flightAddOnPrice);
+            cartArray.push(this.flightAddOnPrice);
             this.isFlightAddOnSelected = true;
         }
 
         if (addOnType === this.hotelAddOn) {
             this.subtotal.push(this.hotelAddOnPrice);
+            cartArray.push(this.hotelAddOnPrice);
             this.isHotelAddOnSelected = true;
         }
 
         if (addOnType === this.eventAddOn) {
             this.subtotal.push(this.eventAddOnPrice);
+            cartArray.push(this.eventAddOnPrice);
             this.isEventAddOnSelected = true;
         }
-
     }
 
     //keeps track of which additional package options have been de-selected
@@ -192,54 +200,62 @@ class Package {
                 this.isEventAddOnSelected = false;
          }
      }
+}
 
-    
-    calculator() {
-        this.subtotal;
-        console.log(this.subtotal);
-    }
+const testPackage = new Package(
+    "Bali",
+    "International",
+    "Tropical",
+    1399,
+    "First Class Flight",
+    199,
+    "Honeymoon Suite",
+    275,
+    "Trip to Seminyak Beach",
+    90
+);
+
+const testPackage2 = new Package(
+    "Sicily",
+    "International",
+    "European",
+    1199,
+    "First Class Flight",
+    250,
+    "Honeymoon Suite",
+    399,
+    "Trek Mount Etna",
+    350
+);
+
+const testPackage3 = new Package(
+    "Alaska",
+    "Domestic",
+    "Arctic",
+    1099,
+    "Pilot Seat Flight",
+    299,
+    "Honeymoon Suite",
+    175,
+    "Kenai Wildlife Cruise",
+    350
+);
+
+
+function calculator() {
+    let subtotal = cartArray.reduce(function(a, b) { return a + b; }, 0);
+    let packageAndFeatureTotal = document.querySelector("#subtotal");
+    packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}`;
+    let tax = subtotal * .09;
+    let salesTax = document.querySelector("#sales-tax");
+    salesTax.innerHTML = `Sales Tax: $${tax}`;
+    let grandTotal = subtotal + tax;
+    let total = document.querySelector("#total");
+    total.innerHTML = `Total: $${grandTotal}`;
+
 }
 
 
-const testPackage = new Package (
-       "Atlanta", 
-       "local", 
-       "Southern City", 
-       1399,
-       "Business Class Flight",
-       199,
-       "Penthouse at the W",
-       399,
-       "VIP Club Package",
-       350
-       );
-
-const testPackage2 = new Package (
-        "Nashville", 
-        "local", 
-        "Southern City", 
-        1199,
-        "First Class Flight",
-        250,
-        "Penthouse on Broadway",
-        399,
-        "Moonshine Making Package",
-        350
-        );
-
-const testPackage3 = new Package (
-            "Houston", 
-            "local", 
-            "SouthWest City", 
-            1099,
-            "Pilot Seat Flight",
-            199,
-            "Penthouse at UofH",
-            399,
-            "Texans Suite Tickets",
-            350
-            );
-    
 
 
 
@@ -248,6 +264,7 @@ const testPackage3 = new Package (
 let packageOneSelector = document.querySelector("#container1");
 let packageTwoSelector = document.querySelector("#container2");
 let packageThreeSelector = document.querySelector("#container3");
+
 
 
 // Package EVENT LISTENERS
@@ -327,6 +344,7 @@ packageOneSelector.addEventListener("click", function (e){
         }
     
     }
+  calculator();
 });
 
 // Package two listener
@@ -398,9 +416,12 @@ packageTwoSelector.addEventListener("click", function(e){
             testPackage2.AddOnRemoved(testPackage2.eventAddOn);
         }
 
-    }
 
-});
+    }
+    calculator();
+
+})
+
 
 // Package three listener
 packageThreeSelector.addEventListener("click", function(e){
@@ -447,6 +468,7 @@ packageThreeSelector.addEventListener("click", function(e){
        
     }
 
+
     if(e.target.matches('input[name="hotel"]')){
         if(! testPackage3.isHotelAddOnSelected){
 
@@ -470,5 +492,14 @@ packageThreeSelector.addEventListener("click", function(e){
             testPackage3.AddOnRemoved(testPackage3.eventAddOn);
         }
     }
+    calculator();
 
 });
+
+
+
+
+
+
+// window.onload = cartArray.reduce(function(a, b) {return a + b;}, 0);
+
