@@ -150,13 +150,13 @@ const testPackage3 = new Package(
 function calculator() {
     let subtotal = cartArray.reduce(function(a, b) { return a + b; }, 0);
     let packageAndFeatureTotal = document.querySelector("#subtotal");
-    packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}`;
+    packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`;
     let tax = subtotal * .09;
     let salesTax = document.querySelector("#sales-tax");
-    salesTax.innerHTML = `Sales Tax: $${tax}`;
+    salesTax.innerHTML = `Sales Tax: ${tax}`;
     let grandTotal = subtotal + tax;
     let total = document.querySelector("#total");
-    total.innerHTML = `Total: $${grandTotal}`;
+    total.innerHTML = `Total: ${grandTotal}`;
 }
 
 
