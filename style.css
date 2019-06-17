@@ -1,13 +1,17 @@
 html {
     height: 100%;
+    width: 100%;
+    margin: 0px;
 }
 
 body {
-    height: 100%;
-    margin-top: 0;
+    min-height: 100%;
+    width: 100%;
+    background-color:#EFEFEF;
+    /* margin-top: 0;
     margin-left: 5%;
     margin-right: 5%;
-    background-image: url("./lightslate.png");
+    background-image: url("./lightslate.png"); */
 }
 
 header {
@@ -24,16 +28,53 @@ header {
 .cart {
     background: floralwhite;
     height: 100%;
-    width: 25%;
+    width: 40%;
     position: absolute;
     left: 90%;
     top: 0;
     transform: translateX(-10%);
 }
 
+#cart-header{
+    font-size: 25px;
+    color: #a9a9a9;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    margin: 5px;
+}
+
+#pkg-in-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    font-size: 30px;
+    
+}
+
+#pkg-in-cart > * {
+   margin: 5px;
+   font-size: 25px;
+   border-top: 1px solid rgb(247, 209, 179);
+}
+
 #calculator {
     position: absolute;
     top: 50%;
+}
+
+#subtotal{
+    margin: 5px;
+    font-size: 20px;
+}
+
+#checkout{
+    height: 30px;
+    width: 40%;
+    background-color: #FF3B3F;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    border: none;
 }
 
 
@@ -45,40 +86,61 @@ header {
     flex-flow: wrap;
     justify-content: space-between;
     height: 100%;
-    padding-right: 10%;
+    margin-right: 15%;
+    margin-left: 1%;
 }
 
 .packages {
     width: 30%;
-    height: 30%;
+    height: 60%;
+    background-color: rgb(240, 240, 230);
+}
+
+h1{
+  text-align: center;
+  margin-block-end: 0px;
+  font-size: 45px;
+  color: #1d4b55;
+}
+
+h3{
+   text-align: center;
+   color: #FF3B3F;
+   margin-block-start: 0px;
+   margin-inline-start: 25px;
 }
 
 ul {
-    margin-left: -10%;
-    text-align: left;
+    padding-inline-start: 0px;
+    text-align: center;
     list-style-type: none;
     font-size: 20px;
 }
 
 button {
-    position: relative;
+    /* position: relative;
     left: 50%;
-    transform: translateX(-50%);
-    height: 30px;
-    width: 100px;
-    background-color: forestgreen;
+    transform: translateX(-50%); 
+    border-radius: 15%;*/
+    height: 40px;
+    width: 95%;
+    background-color: #1d4b55;
+    color: white;
     border: none;
-    border-radius: 15%;
-    font-size: 18px;
+    
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 10px;
 }
 
 .image {
-    width: 100%;
-    height: 125%;
-    border-radius: 10px;
-    color: floralwhite;
-    font-size: 40px;
-    text-indent: 20px;
+    /* width: 100%; */
+    height: 360px;
+    /* border-radius: 10px; */
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 100px;
+    text-align: center;
+    line-height: 360px;
 }
 
 #bali-image {
