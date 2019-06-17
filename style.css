@@ -124,3 +124,34 @@ footer {
 .company-info:hover {
     color: floralwhite;
 }
+
+
+/* Checkout Form */
+
+.checkout-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 400px;
+    height: 600px;
+    background: floralwhite;
+    border-radius: 20px;
+}
+
+.form-elements {
+    display: flex;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-60%, -80%);
+}
+
+#card-image {
+    height: 5%;
+    width: 50%;
+    margin: 20px;
+    background-image: url("./creditCards.png");
+    background-size: 100%;
+}
