@@ -70,6 +70,10 @@ class Package {
     hideAddOnPackage(detailsID){
         const packageElem = document.getElementById(detailsID);
 
+         this.isFlightAddOnSelected = false;
+         this.isHotelAddOnSelected = false;
+         this.isEventAddOnSelected = false;
+
          while (packageElem.hasChildNodes()){
              packageElem.removeChild(packageElem.firstChild);
          }
@@ -302,6 +306,8 @@ packageOneSelector.addEventListener("click", function (e){
     }
 
     if(e.target.matches('input[name="flight"]')){
+
+           
         if(! testPackage.isFlightAddOnSelected){
 
           testPackage.AddOnSelected(testPackage.flightAddOn);
@@ -314,15 +320,28 @@ packageOneSelector.addEventListener("click", function (e){
     }
 
     if(e.target.matches('input[name="hotel"]')){
+        if(! testPackage.isHotelAddOnSelected){
 
-        testPackage.AddOnSelected(testPackage.hotelAddOn);
-        testPackage.displayAddOnInCart(testPackage.hotelAddOn);
+            testPackage.AddOnSelected(testPackage.hotelAddOn);
+            testPackage.displayAddOnInCart(testPackage.hotelAddOn);
+        } else {
+
+            testPackage.removeAddOnFromCart(testPackage.hotelAddOn);
+            testPackage.AddOnRemoved(testPackage.hotelAddOn);
+        }
     }
 
     if(e.target.matches('input[name="event"]')){
 
-        testPackage.AddOnSelected(testPackage.eventAddOn);
-        testPackage.displayAddOnInCart(testPackage.eventAddOn);
+       if(! testPackage.isEventAddOnSelected){
+            
+            testPackage.AddOnSelected(testPackage.eventAddOn);
+            testPackage.displayAddOnInCart(testPackage.eventAddOn);
+        } else {
+
+            testPackage.removeAddOnFromCart(testPackage.eventAddOn);
+            testPackage.AddOnRemoved(testPackage.eventAddOn);
+        }
     
     }
   calculator();
@@ -362,19 +381,40 @@ packageTwoSelector.addEventListener("click", function(e){
     }
 
     if(e.target.matches('input[name="flight"]')){
-        testPackage2.AddOnSelected(testPackage2.flightAddOn);
-        testPackage2.displayAddOnInCart(testPackage2.flightAddOn);
+        if(! testPackage2.isFlightAddOnSelected){
+
+            testPackage2.AddOnSelected(testPackage2.flightAddOn);
+            testPackage2.displayAddOnInCart(testPackage2.flightAddOn);
+          } else {
+             
+             testPackage2.removeAddOnFromCart(testPackage2.flightAddOn);
+             testPackage2.AddOnRemoved(testPackage2.flightAddOn);
+          }
     }
 
     if(e.target.matches('input[name="hotel"]')){
-        testPackage2.AddOnSelected(testPackage2.hotelAddOn);
-        testPackage2.displayAddOnInCart(testPackage2.hotelAddOn);
+        if(! testPackage2.isHotelAddOnSelected){
+
+            testPackage2.AddOnSelected(testPackage2.hotelAddOn);
+            testPackage2.displayAddOnInCart(testPackage2.hotelAddOn);
+        } else {
+
+            testPackage2.removeAddOnFromCart(testPackage2.hotelAddOn);
+            testPackage2.AddOnRemoved(testPackage2.hotelAddOn);
+        }
        
     }
 
     if(e.target.matches('input[name="event"]')){
-        testPackage2.AddOnSelected(testPackage2.eventAddOn);
-        testPackage2.displayAddOnInCart(testPackage2.eventAddOn);
+        if(! testPackage2.isEventAddOnSelected){
+            
+            testPackage2.AddOnSelected(testPackage2.eventAddOn);
+            testPackage2.displayAddOnInCart(testPackage2.eventAddOn);
+        } else {
+
+            testPackage2.removeAddOnFromCart(testPackage2.eventAddOn);
+            testPackage2.AddOnRemoved(testPackage2.eventAddOn);
+        }
 
 
     }
@@ -416,21 +456,41 @@ packageThreeSelector.addEventListener("click", function(e){
     }
 
     if(e.target.matches('input[name="flight"]')){
-        testPackage3.AddOnSelected(testPackage3.flightAddOn);
-        testPackage3.displayAddOnInCart(testPackage3.flightAddOn);
+        if(! testPackage3.isFlightAddOnSelected){
+
+            testPackage3.AddOnSelected(testPackage3.flightAddOn);
+            testPackage3.displayAddOnInCart(testPackage3.flightAddOn);
+          } else {
+             
+             testPackage3.removeAddOnFromCart(testPackage3.flightAddOn);
+             testPackage3.AddOnRemoved(testPackage3.flightAddOn);
+          }
        
     }
 
 
     if(e.target.matches('input[name="hotel"]')){
-        testPackage3.AddOnSelected(testPackage3.hotelAddOn);
-        testPackage3.displayAddOnInCart(testPackage3.hotelAddOn);
+        if(! testPackage3.isHotelAddOnSelected){
+
+            testPackage3.AddOnSelected(testPackage3.hotelAddOn);
+            testPackage3.displayAddOnInCart(testPackage3.hotelAddOn);
+        } else {
+
+            testPackage3.removeAddOnFromCart(testPackage3.hotelAddOn);
+            testPackage3.AddOnRemoved(testPackage3.hotelAddOn);
+        }
     }
 
     if(e.target.matches('input[name="event"]')){
-        testPackage3.AddOnSelected(testPackage3.eventAddOn);
-        testPackage3.displayAddOnInCart(testPackage3.eventAddOn);
+        if(! testPackage3.isEventAddOnSelected){
+            
+            testPackage3.AddOnSelected(testPackage3.eventAddOn);
+            testPackage3.displayAddOnInCart(testPackage3.eventAddOn);
+        } else {
 
+            testPackage3.removeAddOnFromCart(testPackage3.eventAddOn);
+            testPackage3.AddOnRemoved(testPackage3.eventAddOn);
+        }
     }
     calculator();
 
