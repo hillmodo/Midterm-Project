@@ -10,7 +10,89 @@
 
 <body>
     <header></header>
-    <div class="checkout-parent"></div>
+    <div class="checkout-parent">
+        <div class="payment payment-type">
+            <div class="payment-type-elem">Please Select Your Payment Type</div>
+            <input type="radio" class="payment-type-elem" name="type" value="cash">Cash<br>
+            <input type="radio" class="payment-type-elem" name="type" value="credit-card">Credit Card
+            <input type="button" class="payment-type-elem" id="proceed" value="Proceed">
+        </div>
+        <div class="payment cash-form">
+            <div>hey</div>
+        </div>
+        <ul class="payment checkout-form">
+            <div class="order-summary">
+                <div id="summary">Order Summary</div>
+                <div id="subtotal"></div>
+                <div id="sales-tax"></div>
+                <div id="total"></div>
+            </div>
+            <input type="text" class="form-elements" id="name" placeholder="Full Name">
+            <input type="text" class="form-elements" id="street-address" placeholder="Street Address">
+            <input type="text" class="form-elements" id="city" placeholder="City">
+            <select class="form-elements" id="state" placeholder="State">
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusettes">Massachusettes</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                        </select>
+            <input type="text" class="form-elements" placeholder="Zip Code">
+            <input type="text" class="form-elements" placeholder="Phone Number">
+            <input type="text" class="form-elements" placeholder="Email">
+            <div class="form-elements" id="card-image"></div>
+            <input type="text" class="form-elements" id="credit-card" placeholder="Credit Card Number">
+            <input type="text" class="form-elements" id="exp-date" placeholder="Expiration MM/YYYY">
+            <input type="text" class="form-elements" id="cvv" placeholder="CVV">
+
+            <input type="button" class="form-elements" id="process-btn" value="Process Payment">
+        </ul>
+    </div>
     <div class="menu">
         <div class="packages" id="container1">
             <div class="image" id="bali-image">Bali</div>
@@ -51,12 +133,13 @@
     </div>
 
 
-    <div class="cart" id="shopping-cart">
-        <div id="cart-header">Your Cart</div></div>
+    <div class="cart" id="shopping-cart">Your Cart
+        <div id="cart-header">Your Cart</div>
+    </div>
     <div class="cart" id="calculator">
         <div id="subtotal">SUBTOTAL</div>
-        <!-- <div id="sales-tax">Sales Tax:</div>
-        <div id="total">Total:</div> -->
+        <div id="sales-tax">Sales Tax:</div>
+        <div id="total">Total:</div>
         <input type="button" id="checkout" value="CHECKOUT">
 
 
