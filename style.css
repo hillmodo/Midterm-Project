@@ -7,6 +7,7 @@ html {
 body {
     min-height: 100%;
     width: 100%;
+
     background-color:#EFEFEF;
     display: flex;
     flex-flow: wrap;
@@ -41,6 +42,7 @@ header > img {
     
 }
 
+
  #cart-header{
     font-size: 25px;
     color: #a9a9a9;
@@ -57,23 +59,18 @@ header > img {
     /* flex-direction: column;
     justify-content: space-evenly; */
     font-size: 30px;
-    height: 75%;
-    width: 100%;
-    
 }
+    
 
 #pkg-in-cart > * {
    border-top: 1px solid rgb(247, 209, 179);
-   
+  
 }
 
 .item-name{
     width: 70%;
 }
 
-.item-price{
-    width: 30%;
-}
 
 
 #subtotal{
@@ -88,8 +85,8 @@ header > img {
     width: 100%;
 }
 
-#checkout{
 
+#checkout{
     background-color: #FF3B3F;
     color: white;
     font-weight: bold;
@@ -117,18 +114,18 @@ header > img {
     background-color: rgb(240, 240, 230);
 }
 
-h1{
-  text-align: center;
-  margin-block-end: 0px;
-  font-size: 45px;
-  color: #1d4b55;
+h1 {
+    text-align: center;
+    margin-block-end: 0px;
+    font-size: 45px;
+    color: #1d4b55;
 }
 
-h3{
-   text-align: center;
-   color: #FF3B3F;
-   margin-block-start: 0px;
-   margin-inline-start: 25px;
+h3 {
+    text-align: center;
+    color: #FF3B3F;
+    margin-block-start: 0px;
+    margin-inline-start: 25px;
 }
 
 ul {
@@ -148,7 +145,6 @@ button {
     background-color: #1d4b55;
     color: white;
     border: none;
-    
     font-size: 30px;
     font-weight: bold;
     margin-left: 10px;
@@ -216,7 +212,7 @@ footer {
 
 /* Checkout Form */
 
-.checkout-form {
+.payment {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -241,5 +237,22 @@ footer {
     width: 50%;
     margin: 20px;
     background-image: url("./creditCards.png");
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#payment-type {
+    visibility: hidden;
+}
+
+#cash-form {
+    visibility: hidden;
+}
+
+#credit-form {
+    visibility: hidden;
+}
+
+#receipt {
+    visibility: hidden;
 }

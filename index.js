@@ -1,4 +1,10 @@
-let cartArray = [];
+let cartObject = {
+    price: 0,
+    flight: 0,
+    hotel: 0,
+    event: 0,
+};
+
 
 class Package {
     constructor(name, category, desc, price, flight, flightPrice, hotel, hotelPrice, event, eventPrice) {
@@ -17,8 +23,9 @@ class Package {
         this.isEventAddOnSelected = false;
         this.isPackageSelected = false;
         this.eventAddOnSelected = false;
-
     }
+
+
 
     //Displays standard package in cart area
     displayInCart() {
@@ -26,6 +33,7 @@ class Package {
         const selectedCartElem = document.createElement("div");
 
         selectedCartElem.id = "pkg-in-cart";
+
 
         selectedCartElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.name + '</div>' ); 
         selectedCartElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.price + '</div>');
@@ -42,7 +50,7 @@ class Package {
 
     removeFromCart() {
         const removeCartElem = document.querySelector("#pkg-in-cart");
-
+        // cartArray.splice(removeCartElem, 1);
         // while (removeCartElem.hasChildNodes()){
         //     removeCartElem.removeChild(removeCartElem.firstChild);
         // }
@@ -117,14 +125,17 @@ class Package {
 
         if (addOnType === this.flightAddOn) {
             removedAddOn = document.querySelector("#flight-add");
+            cartObject.flight = 0;
         }
 
         if (addOnType === this.hotelAddOn) {
             removedAddOn = document.querySelector("#hotel-add");
+            cartObject.hotel = 0;
         }
 
         if (addOnType === this.eventAddOn) {
             removedAddOn = document.querySelector("#event-add");
+            cartObject.event = 0;
         }
 
         // while (removedAddOn.hasChildNodes()){
@@ -138,17 +149,19 @@ class Package {
     AddOnSelected(addOnType) {
 
         if (addOnType === this.flightAddOn) {
-            cartArray.push(this.flightAddOnPrice);
+            cartObject.flight = this.flightAddOnPrice;
+
             this.isFlightAddOnSelected = true;
+
         }
 
         if (addOnType === this.hotelAddOn) {
-            cartArray.push(this.hotelAddOnPrice);
+            cartObject.hotel = this.hotelAddOnPrice;
             this.isHotelAddOnSelected = true;
         }
 
         if (addOnType === this.eventAddOn) {
-            cartArray.push(this.eventAddOnPrice);
+            cartObject.event = this.eventAddOnPrice;
             this.isEventAddOnSelected = true;
         }
     }
@@ -198,7 +211,26 @@ class Package {
                 this.isEventAddOnSelected = false;
         }
     }
+
+
+    calculator() {
+        let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
+        let packageAndFeatureTotal = document.getElementsByClassName("subtotal");
+        // packageAndFeatureTotal.forEach((e) => {
+        // packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`;
+        // })
+        packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}.00`;
+        let tax = subtotal * .09;
+        let salesTax = document.getElementsByClassName("sales-tax");
+        salesTax.innerHTML = `Sales Tax: $${tax}`;
+        let grandTotal = subtotal + tax;
+        let total = document.getElementsByClassName("total");
+        total.innerHTML = `Total: $${grandTotal}`;
+    }
+
 }
+
+let package = new Package();
 
 const testPackage = new Package(
     "Bali",
@@ -238,23 +270,6 @@ const testPackage3 = new Package(
     "Kenai Wildlife Cruise",
     350
 );
-
-
-function calculator() {
-    let subtotal = cartArray.reduce(function(a, b) { return a + b; }, 0);
-    let packageAndFeatureTotal = document.querySelector("#subtotal");
-    packageAndFeatureTotal.innerHTML = `SUBTOTAL: $${subtotal}`;
-    // let tax = subtotal * .09;
-    // let salesTax = document.querySelector("#sales-tax");
-    // salesTax.innerHTML = `Sales Tax: $${tax}`;
-    // let grandTotal = subtotal + tax;
-    // let total = document.querySelector("#total");
-    // total.innerHTML = `Total: $${grandTotal}`;
-
-}
-
-
-
 
 
 
@@ -299,7 +314,6 @@ packageOneSelector.addEventListener("click", function(e) {
             testPackage.hideAddOnPackage("pkg-one-details");
 
         }
-        console.log(testPackage);
 
     }
 
@@ -342,7 +356,7 @@ packageOneSelector.addEventListener("click", function(e) {
         }
 
     }
-    calculator();
+    package.calculator();
 });
 
 // Package two listener
@@ -375,7 +389,6 @@ packageTwoSelector.addEventListener("click", function(e) {
             testPackage2.hideAddOnPackage("pkg-two-details");
 
         }
-        console.log(testPackage2);
     }
 
     if (e.target.matches('input[name="flight"]')) {
@@ -416,7 +429,7 @@ packageTwoSelector.addEventListener("click", function(e) {
 
 
     }
-    calculator();
+    package.calculator();
 
 })
 
@@ -450,7 +463,6 @@ packageThreeSelector.addEventListener("click", function(e) {
             testPackage3.hideAddOnPackage("pkg-three-details");
 
         }
-        console.log(testPackage3);
     }
 
     if (e.target.matches('input[name="flight"]')) {
@@ -490,101 +502,86 @@ packageThreeSelector.addEventListener("click", function(e) {
             testPackage3.AddOnRemoved(testPackage3.eventAddOn);
         }
     }
-    calculator();
+    package.calculator();
 
 });
 
 
-
-class Checkout extends Package {
-    constructor(name, category, desc, price, flight, flightPrice, hotel, hotelPrice, event, eventPrice) {
-        super(name, category, desc, price, flight, flightPrice, hotel, hotelPrice, event, eventPrice);
+class Checkout {
+    constructor(checkoutButton, checkoutParent) {
+        this.checkoutButton = checkoutButton;
+        this.checkoutParent = checkoutParent;
     };
 
-    checkoutForm() {
-        const checkoutButton = document.querySelector("#checkout");
-        const checkoutParent = document.querySelector(".checkout-parent");
-        console.log(checkoutParent);
-        let checkoutForm = document.createElement("ul");
-        checkoutForm.className = "checkout-form";
-        checkoutForm.innerHTML = `
-        <input type="text" class="form-elements" id="name" placeholder="Full Name">
-        <input type="text" class="form-elements" id="street-address"
-        placeholder="Street Address">
-        <input type="text" class="form-elements" id="city" placeholder="City">
-        <select class="form-elements" id="state" placeholder="State">
-        <option value="Alabama">Alabama</option>
-        <option value="Alaska">Alaska</option>
-        <option value="Arizona">Arizona</option>
-        <option value="Arkansas">Arkansas</option>
-        <option value="California">California</option>
-        <option value="Colorado">Colorado</option>
-        <option value="Connecticut">Connecticut</option>
-        <option value="Delaware">Delaware</option>
-        <option value="Florida">Florida</option>
-        <option value="Georgia">Georgia</option>
-        <option value="Hawaii">Hawaii</option>
-        <option value="Idaho">Idaho</option>
-        <option value="Illinois">Illinois</option>
-        <option value="Indiana">Indiana</option>
-        <option value="Iowa">Iowa</option>
-        <option value="Kansas">Kansas</option>
-        <option value="Kentucky">Kentucky</option>
-        <option value="Louisiana">Louisiana</option>
-        <option value="Maine">Maine</option>
-        <option value="Maryland">Maryland</option>
-        <option value="Massachusettes">Massachusettes</option>
-        <option value="Michigan">Michigan</option>
-        <option value="Minnesota">Minnesota</option>
-        <option value="Mississippi">Mississippi</option>
-        <option value="Missouri">Missouri</option>
-        <option value="Montana">Montana</option>
-        <option value="Nebraska">Nebraska</option>
-        <option value="Nevada">Nevada</option>
-        <option value="New Hampshire">New Hampshire</option>
-        <option value="New Jersey">New Jersey</option>
-        <option value="New Mexico">New Mexico</option>
-        <option value="New York">New York</option>
-        <option value="North Carolina">North Carolina</option>
-        <option value="North Dakota">North Dakota</option>
-        <option value="Ohio">Ohio</option>
-        <option value="Oklahoma">Oklahoma</option>
-        <option value="Oregon">Oregon</option>
-        <option value="Pennsylvania">Pennsylvania</option>
-        <option value="Rhode Island">Rhode Island</option>
-        <option value="South Carolina">South Carolina</option>
-        <option value="South Dakota">South Dakota</option>
-        <option value="Tennessee">Tennessee</option>
-        <option value="Texas">Texas</option>
-        <option value="Utah">Utah</option>
-        <option value="Vermont">Vermont</option>
-        <option value="Virginia">Virginia</option>
-        <option value="Washington">Washington</option>
-        <option value="West Virginia">West Virginia</option>
-        <option value="Wisconsin">Wisconsin</option>
-        <option value="Wyoming">Wyoming</option>
-        </select>
-        <input type="text" class="form-elements" placeholder="Zip Code">
-        <input type="text" class="form-elements" placeholder="Phone Number">
-        <input type="text" class="form-elements" placeholder="Email">
-        <div class="form-elements" id="card-image"></div>
-        <input type="text" class="form-elements" id="credit-card" placeholder="Credit Card Number">
-        <input type="text" class="form-elements" id="exp-date" placeholder="Expiration MM/YYYY">
-        <input type="text" class="form-elements" id="cvv" placeholder="CVV">
-
-        <input type="button" class="form-elements" id="process-btn" value="Process Payment">
-
-        `
+    processPayment() {
+        this.checkoutButton = document.getElementById("checkout");
+        const paymentType = document.getElementById("payment-type");
+        const cashForm = document.getElementById("cash-form");
+        const creditForm = document.getElementById("credit-form");
+        const proceed = document.getElementById("proceed");
+        const process = document.getElementById("process-btn");
+        const process2 = document.getElementById("process-btn2");
+        let contanctInfo = document.getElementById("contact-info");
 
 
 
-        checkoutButton.addEventListener("click", (e) => {
-            checkoutParent.appendChild(checkoutForm);
-            console.log("hey");
+        this.checkoutButton.addEventListener("click", (e) => {
+            paymentType.style = "visibility: inherit;";
+        });
+
+        proceed.addEventListener("click", (e) => {
+            let type = document.querySelector('input[name="type"]:checked').value;
+            console.log(type);
+            if (type === "cash") {
+                paymentType.style = "visibility: hidden;";
+                cashForm.style = "visibility: inherit;";
+            } else if (type === "credit-card") {
+                paymentType.style = "visibility: hidden;";
+                creditForm.style = "visibility: inherit;";
+            }
+        });
+
+        process.addEventListener("click", (e) => {
+            cashForm.style = "visibility: hidden;";
+            receipt.style = "visibility: inherit;";
+
         })
-    };
 
+        process2.addEventListener("click", (e) => {
+            let nameInput = document.getElementById("name").value;
+            let address = document.getElementById("street-address").value;
+            let city = document.getElementById("city").value;
+            let state = document.getElementById("state").value;
+            let zipcode = document.getElementById("zipcode").value;
+            let phone = document.getElementById("phone").value;
+            let email = document.getElementById("email").value;
+            let creditCard = document.getElementById("credit-card").value;
+            let expiration = document.getElementById("exp-date").value;
+            let cvv = document.getElementById("cvv").value;
+            creditForm.style = "visiblity: hidden;";
+            receipt.style = "visibility: inherit;";
+            contanctInfo.innerHTML = `
+            <div>Thank you for your order!</div>
+            <div>Your package information and tickets will be shipped to:</div>
+            <div>${nameInput}</div>
+            <div>${address}</div>
+            <div>${city}</div>
+            <div>${state}</div>
+            <div>${zipcode}</div>
+            <div>${phone}</div>
+            <div>${email}</div>
+            <div>**** **** **** ****</div>
+            <div>${expiration}</div>
+            <div>***</div>
+            `;
+
+        })
+
+
+    }
 }
 
+
+
 let checkout = new Checkout();
-checkout.checkoutForm();
+checkout.processPayment();
