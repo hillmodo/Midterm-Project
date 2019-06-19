@@ -27,9 +27,10 @@ class Package {
 
         selectedCartElem.id = "pkg-in-cart";
 
-        selectedCartElem.insertAdjacentText('beforeend', this.name + " $" + this.price);
-        selectedCartElem.insertAdjacentHTML('beforeend', '<br>');
-
+        selectedCartElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.name + '</div>' ); 
+        selectedCartElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.price + '</div>');
+        
+        
         // attempt to push price into subtotal array//
         cartArray.push(this.price);
         console.log(cartArray);
@@ -54,16 +55,16 @@ class Package {
     //Displays  additional package options when standard package is selected
     displayAddOnsInPackage(detailsID) {
         const packageElem = document.getElementById(detailsID);
-        const addOnElem = document.createElement("form");
-        addOnElem.className = "addOnForm";
+        // const addOnElem = document.createElement("form");
+        // addOnElem.className = "addOnForm";
+
+        packageElem.insertAdjacentHTML('beforeend','<h3 class="add-on-title">Upgrade Your Package!</h3>');
+        packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="flight">' + this.flightAddOn + " $" + this.flightAddOnPrice + '<br>');
+        packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="hotel">' + this.hotelAddOn + " $" + this.hotelAddOnPrice + '<br>');
+        packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="event">' + this.eventAddOn + " $" + this.eventAddOnPrice + '<br>');
 
 
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="flight">' + this.flightAddOn + " $" + this.flightAddOnPrice + '<br>');
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="hotel">' + this.hotelAddOn + " $" + this.hotelAddOnPrice + '<br>');
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="event">' + this.eventAddOn + " $" + this.eventAddOnPrice + '<br>');
-
-
-        packageElem.appendChild(addOnElem);
+        // packageElem.appendChild(addOnElem);
     }
 
     hideAddOnPackage(detailsID) {
@@ -82,29 +83,31 @@ class Package {
     displayAddOnInCart(addOnType) {
         const cartElem = document.querySelector(".cart");
         const pkgElem = document.querySelector("#pkg-in-cart");
-        const selectedAddOn = document.createElement("div");
+        
 
 
 
         if (addOnType === this.flightAddOn) {
-            selectedAddOn.id = "flight-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.flightAddOn + " $" + this.flightAddOnPrice);
-            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
+            
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.flightAddOn + '</div>' ); 
+            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.flightAddOnPrice + '</div>');
+            
         }
 
         if (addOnType === this.hotelAddOn) {
-            selectedAddOn.id = "hotel-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.hotelAddOn + " $" + this.hotelAddOnPrice);
-            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
+            
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.hotelAddOn + '</div>' ); 
+            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.hotelAddOnPrice + '</div>');
+            
         }
 
         if (addOnType === this.eventAddOn) {
-            selectedAddOn.id = "event-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.eventAddOn + " $" + this.eventAddOnPrice);
-            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.eventAddOn + '</div>' ); 
+            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.eventAddOnPrice + '</div>');
+            
         }
 
-        pkgElem.appendChild(selectedAddOn);
+        
         cartElem.appendChild(pkgElem);
 
     }
@@ -135,20 +138,16 @@ class Package {
     AddOnSelected(addOnType) {
 
         if (addOnType === this.flightAddOn) {
-
-            this.subtotal.push(this.flightAddOnPrice);
             cartArray.push(this.flightAddOnPrice);
             this.isFlightAddOnSelected = true;
         }
 
         if (addOnType === this.hotelAddOn) {
-            this.subtotal.push(this.hotelAddOnPrice);
             cartArray.push(this.hotelAddOnPrice);
             this.isHotelAddOnSelected = true;
         }
 
         if (addOnType === this.eventAddOn) {
-            this.subtotal.push(this.eventAddOnPrice);
             cartArray.push(this.eventAddOnPrice);
             this.isEventAddOnSelected = true;
         }
@@ -244,13 +243,13 @@ const testPackage3 = new Package(
 function calculator() {
     let subtotal = cartArray.reduce(function(a, b) { return a + b; }, 0);
     let packageAndFeatureTotal = document.querySelector("#subtotal");
-    packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}`;
-    let tax = subtotal * .09;
-    let salesTax = document.querySelector("#sales-tax");
-    salesTax.innerHTML = `Sales Tax: $${tax}`;
-    let grandTotal = subtotal + tax;
-    let total = document.querySelector("#total");
-    total.innerHTML = `Total: $${grandTotal}`;
+    packageAndFeatureTotal.innerHTML = `SUBTOTAL: $${subtotal}`;
+    // let tax = subtotal * .09;
+    // let salesTax = document.querySelector("#sales-tax");
+    // salesTax.innerHTML = `Sales Tax: $${tax}`;
+    // let grandTotal = subtotal + tax;
+    // let total = document.querySelector("#total");
+    // total.innerHTML = `Total: $${grandTotal}`;
 
 }
 
