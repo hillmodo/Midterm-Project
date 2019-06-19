@@ -7,73 +7,92 @@ html {
 body {
     min-height: 100%;
     width: 100%;
-    background-color: #EFEFEF;
-    /* margin-top: 0;
-    margin-left: 5%;
-    margin-right: 5%;
-    background-image: url("./lightslate.png"); */
+
+    background-color:#EFEFEF;
+    display: flex;
+    flex-flow: wrap;
+    font-family: 'Roboto Condensed', sans-serif;
+    /* background-image: url("./vacay.png");
+    background-size: cover;
+    background-repeat: no-repeat; */
 }
 
 header {
-    padding: 10px;
-    height: 100px;
-    width: 200px;
-    background-image: url("./vacatuslogo.png");
-    background-size: cover;
+    /* padding: 10px; */
+    height: 10%;
+    width: 100%;
+    /* background-color: white; */
+    /* background-image: url("./vacatuslogo.png"); */
+    /* background-size: cover; */ 
 }
 
+header > img {
+    height:100px;
+}
 
 /* Cart area style */
 
-.cart {
+#shopping-cart {
     background: floralwhite;
-    height: 100%;
-    width: 40%;
-    position: absolute;
-    left: 90%;
-    top: 0;
-    transform: translateX(-10%);
+    width: 25%;
+    
+    display:flex;
+    flex-wrap: wrap;
+    
+    
 }
 
-#cart-header {
+
+ #cart-header{
     font-size: 25px;
     color: #a9a9a9;
-    border-bottom: 1px solid rgb(202, 202, 202);
+    /* border-bottom: 1px solid rgb(202, 202, 202); */
     margin: 5px;
-}
+    width: 100%;
+  
+} 
 
 #pkg-in-cart {
+    order:1;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin: 10px;
+    flex-wrap: wrap;
+    /* flex-direction: column;
+    justify-content: space-evenly; */
     font-size: 30px;
 }
+    
 
-#pkg-in-cart>* {
+#pkg-in-cart > * {
+   border-top: 1px solid rgb(247, 209, 179);
+  
+}
+
+.item-name{
+    width: 70%;
+}
+
+
+
+#subtotal{
     margin: 5px;
     font-size: 25px;
-    border-top: 1px solid rgb(247, 209, 179);
+    height: 60px;
 }
 
-#calculator {
-    position: absolute;
-    top: 50%;
+#calculator{
+    order: 3;
+    align-self: flex-end;
+    width: 100%;
 }
 
-#subtotal {
-    margin: 5px;
-    font-size: 20px;
-}
 
-#checkout {
-    height: 30px;
-    width: 40%;
+#checkout{
     background-color: #FF3B3F;
     color: white;
     font-weight: bold;
     font-size: 25px;
     border: none;
+    width: 100%;
 }
 
 
@@ -85,8 +104,8 @@ header {
     flex-flow: wrap;
     justify-content: space-between;
     height: 100%;
-    margin-right: 15%;
-    margin-left: 1%;
+    flex:2;
+    margin-right: 10px;
 }
 
 .packages {
@@ -136,9 +155,9 @@ button {
     height: 360px;
     /* border-radius: 10px; */
     color: rgba(255, 255, 255, 0.74);
-    font-size: 100px;
+    font-size: 50px;
     text-align: center;
-    line-height: 360px;
+    line-height: 725%;
 }
 
 #bali-image {
@@ -157,15 +176,20 @@ button {
 }
 
 
-/* Package Add On Styling */
 
-.addOnForm {
-    position: relative;
-    top: 40px;
-    width: 275px;
+/* Package Add On Styling */
+.pkg-add-ons{
     font-size: 20px;
 }
 
+.add-on-title {
+    margin-top: 10px;
+}
+
+.add-on-input {
+    margin-left: 10%;
+    
+}
 
 /* Footer Styling */
 

@@ -34,12 +34,14 @@ class Package {
 
         selectedCartElem.id = "pkg-in-cart";
 
-        selectedCartElem.insertAdjacentText('beforeend', this.name + " $" + this.price);
-        selectedCartElem.insertAdjacentHTML('beforeend', '<br>');
 
-        // attempt to push price into subtotal array
-        cartObject.price = this.price;
-        console.log(cartObject);
+        selectedCartElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.name + '</div>' ); 
+        selectedCartElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.price + '</div>');
+        
+        
+        // attempt to push price into subtotal array//
+        cartArray.push(this.price);
+        console.log(cartArray);
         cartElem.appendChild(selectedCartElem);
 
 
@@ -61,16 +63,16 @@ class Package {
     //Displays  additional package options when standard package is selected
     displayAddOnsInPackage(detailsID) {
         const packageElem = document.getElementById(detailsID);
-        const addOnElem = document.createElement("form");
-        addOnElem.className = "addOnForm";
+        // const addOnElem = document.createElement("form");
+        // addOnElem.className = "addOnForm";
+
+        packageElem.insertAdjacentHTML('beforeend','<h3 class="add-on-title">Upgrade Your Package!</h3>');
+        packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="flight">' + this.flightAddOn + " $" + this.flightAddOnPrice + '<br>');
+        packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="hotel">' + this.hotelAddOn + " $" + this.hotelAddOnPrice + '<br>');
+        packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="event">' + this.eventAddOn + " $" + this.eventAddOnPrice + '<br>');
 
 
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="flight">' + this.flightAddOn + " $" + this.flightAddOnPrice + '<br>');
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="hotel">' + this.hotelAddOn + " $" + this.hotelAddOnPrice + '<br>');
-        addOnElem.insertAdjacentHTML('beforeend', '<input type="checkbox" name="event">' + this.eventAddOn + " $" + this.eventAddOnPrice + '<br>');
-
-
-        packageElem.appendChild(addOnElem);
+        // packageElem.appendChild(addOnElem);
     }
 
     hideAddOnPackage(detailsID) {
@@ -89,29 +91,31 @@ class Package {
     displayAddOnInCart(addOnType) {
         const cartElem = document.querySelector(".cart");
         const pkgElem = document.querySelector("#pkg-in-cart");
-        const selectedAddOn = document.createElement("div");
+        
 
 
 
         if (addOnType === this.flightAddOn) {
-            selectedAddOn.id = "flight-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.flightAddOn + " $" + this.flightAddOnPrice);
-            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
+            
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.flightAddOn + '</div>' ); 
+            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.flightAddOnPrice + '</div>');
+            
         }
 
         if (addOnType === this.hotelAddOn) {
-            selectedAddOn.id = "hotel-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.hotelAddOn + " $" + this.hotelAddOnPrice);
-            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
+            
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.hotelAddOn + '</div>' ); 
+            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.hotelAddOnPrice + '</div>');
+            
         }
 
         if (addOnType === this.eventAddOn) {
-            selectedAddOn.id = "event-add";
-            selectedAddOn.insertAdjacentText('beforeend', this.eventAddOn + " $" + this.eventAddOnPrice);
-            selectedAddOn.insertAdjacentHTML('beforeend', '<br>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.eventAddOn + '</div>' ); 
+            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.eventAddOnPrice + '</div>');
+            
         }
 
-        pkgElem.appendChild(selectedAddOn);
+        
         cartElem.appendChild(pkgElem);
 
     }
@@ -146,6 +150,7 @@ class Package {
 
         if (addOnType === this.flightAddOn) {
             cartObject.flight = this.flightAddOnPrice;
+
             this.isFlightAddOnSelected = true;
 
         }
@@ -265,7 +270,6 @@ const testPackage3 = new Package(
     "Kenai Wildlife Cruise",
     350
 );
-
 
 
 
