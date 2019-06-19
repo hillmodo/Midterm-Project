@@ -213,17 +213,22 @@ footer {
     width: 50%;
     margin: 20px;
     background-image: url("./creditCards.png");
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.payment-type {
+#payment-type {
     visibility: hidden;
 }
 
-.cash-form {
+#cash-form {
     visibility: hidden;
 }
 
-.checkout-form {
+#credit-form {
+    visibility: hidden;
+}
+
+#receipt {
     visibility: hidden;
 }

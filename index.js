@@ -210,17 +210,22 @@ class Package {
 
     calculator() {
         let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
-        let packageAndFeatureTotal = document.querySelector("#subtotal");
+        let packageAndFeatureTotal = document.getElementsByClassName("subtotal");
+        // packageAndFeatureTotal.forEach((e) => {
+        // packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`;
+        // })
         packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}.00`;
         let tax = subtotal * .09;
-        let salesTax = document.querySelector("#sales-tax");
+        let salesTax = document.getElementsByClassName("sales-tax");
         salesTax.innerHTML = `Sales Tax: $${tax}`;
         let grandTotal = subtotal + tax;
-        let total = document.querySelector("#total");
+        let total = document.getElementsByClassName("total");
         total.innerHTML = `Total: $${grandTotal}`;
     }
 
 }
+
+let package = new Package();
 
 const testPackage = new Package(
     "Bali",
@@ -260,23 +265,6 @@ const testPackage3 = new Package(
     "Kenai Wildlife Cruise",
     350
 );
-
-let package = new Package();
-
-
-// function calculator() {
-//     let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
-//     let packageAndFeatureTotal = document.querySelector("#subtotal");
-//     packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}.00`;
-//     let tax = subtotal * .09;
-//     let salesTax = document.querySelector("#sales-tax");
-//     salesTax.innerHTML = `Sales Tax: $${tax}`;
-//     let grandTotal = subtotal + tax;
-//     let total = document.querySelector("#total");
-//     total.innerHTML = `Total: $${grandTotal}`;
-// }
-
-
 
 
 
@@ -515,152 +503,81 @@ packageThreeSelector.addEventListener("click", function(e) {
 });
 
 
-
-
 class Checkout {
     constructor(checkoutButton, checkoutParent) {
         this.checkoutButton = checkoutButton;
         this.checkoutParent = checkoutParent;
-
-    }
+    };
 
     processPayment() {
-        this.checkoutbutton = document.querySelector("#checkout");
-        let paymentType = document.querySelector(".payment-type");
-        let paymentTypeElem = document.querySelectorAll(".payment-type-elem");
-        let cashForm = document.querySelector(".cash-form");
-        let checkoutForm = document.querySelector(".checkout-form");
-        this.checkoutbutton.addEventListener("click", (e) => {
+        this.checkoutButton = document.getElementById("checkout");
+        const paymentType = document.getElementById("payment-type");
+        const cashForm = document.getElementById("cash-form");
+        const creditForm = document.getElementById("credit-form");
+        const proceed = document.getElementById("proceed");
+        const process = document.getElementById("process-btn");
+        const process2 = document.getElementById("process-btn2");
+        let contanctInfo = document.getElementById("contact-info");
+
+
+
+        this.checkoutButton.addEventListener("click", (e) => {
             paymentType.style = "visibility: inherit;";
         });
 
-        let proceed = document.querySelector("#proceed");
-        console.log(proceed);
         proceed.addEventListener("click", (e) => {
             let type = document.querySelector('input[name="type"]:checked').value;
+            console.log(type);
             if (type === "cash") {
                 paymentType.style = "visibility: hidden;";
                 cashForm.style = "visibility: inherit;";
-                console.log("hey");
             } else if (type === "credit-card") {
                 paymentType.style = "visibility: hidden;";
-                checkoutForm.style = "visibility: inherit;";
+                creditForm.style = "visibility: inherit;";
             }
+        });
+
+        process.addEventListener("click", (e) => {
+            cashForm.style = "visibility: hidden;";
+            receipt.style = "visibility: inherit;";
+
         })
+
+        process2.addEventListener("click", (e) => {
+            let nameInput = document.getElementById("name").value;
+            let address = document.getElementById("street-address").value;
+            let city = document.getElementById("city").value;
+            let state = document.getElementById("state").value;
+            let zipcode = document.getElementById("zipcode").value;
+            let phone = document.getElementById("phone").value;
+            let email = document.getElementById("email").value;
+            let creditCard = document.getElementById("credit-card").value;
+            let expiration = document.getElementById("exp-date").value;
+            let cvv = document.getElementById("cvv").value;
+            creditForm.style = "visiblity: hidden;";
+            receipt.style = "visibility: inherit;";
+            contanctInfo.innerHTML = `
+            <div>Thank you for your order!</div>
+            <div>Your package information and tickets will be shipped to:</div>
+            <div>${nameInput}</div>
+            <div>${address}</div>
+            <div>${city}</div>
+            <div>${state}</div>
+            <div>${zipcode}</div>
+            <div>${phone}</div>
+            <div>${email}</div>
+            <div>**** **** **** ****</div>
+            <div>${expiration}</div>
+            <div>***</div>
+            `;
+
+        })
+
+
     }
-
-    // paymentType() {
-    //     this.checkoutButton = document.querySelector("#checkout");
-    //     this.checkoutParent = document.querySelector(".checkout-parent");
-    //     // let paymentType = document.createElement("div");
-    //     // paymentType.className = "payment payment-type";
-    //     // paymentType.innerHTML = `
-    //     // <div class="payment-type-elem">Please Select Your Payment Type</div>
-    //     // <input type="radio" class="payment-type-elem" name="payment-type" value="cash">Cash<br>
-    //     // <input type="radio" class="payment-type-elem" name="payment-type" value="credit-card">Credit Card
-    //     // <input type="button" class="payment-type-elem" id="proceed" value="Proceed">
-    //     // `
-    //     this.checkoutButton.addEventListener("click", (e) => {
-    //         this.checkoutParent.appendChild(paymentType);
-    //     })
-
-
-    // }
-
-    // cashForm() {
-    //     this.checkoutButton = document.querySelector("#checkout");
-    //     this.checkoutParent = document.querySelector(".checkout-parent");
-    //     let cashForm = document.createElement("div");
-    //     cashForm.className = "payment cash-form";
-    //     cashForm.innerHTML = `
-    //     <div>hey</div>
-    //     `
-    // }
-
-    // checkoutForm() {
-    //     let checkoutForm = document.createElement("ul");
-    //     checkoutForm.className = "payment checkout-form";
-    //     checkoutForm.innerHTML = `
-    // <div class="order-summary">
-    // <div id="summary">Order Summary</div>
-    // <div id="subtotal"></div>
-    // <div id="sales-tax"></div>
-    // <div id="total"></div>
-    // </div>
-    // <input type="text" class="form-elements" id="name" placeholder="Full Name">
-    // <input type="text" class="form-elements" id="street-address"
-    // placeholder="Street Address">
-    // <input type="text" class="form-elements" id="city" placeholder="City">
-    // <select class="form-elements" id="state" placeholder="State">
-    // <option value="Alabama">Alabama</option>
-    // <option value="Alaska">Alaska</option>
-    // <option value="Arizona">Arizona</option>
-    // <option value="Arkansas">Arkansas</option>
-    // <option value="California">California</option>
-    // <option value="Colorado">Colorado</option>
-    // <option value="Connecticut">Connecticut</option>
-    // <option value="Delaware">Delaware</option>
-    // <option value="Florida">Florida</option>
-    // <option value="Georgia">Georgia</option>
-    // <option value="Hawaii">Hawaii</option>
-    // <option value="Idaho">Idaho</option>
-    // <option value="Illinois">Illinois</option>
-    // <option value="Indiana">Indiana</option>
-    // <option value="Iowa">Iowa</option>
-    // <option value="Kansas">Kansas</option>
-    // <option value="Kentucky">Kentucky</option>
-    // <option value="Louisiana">Louisiana</option>
-    // <option value="Maine">Maine</option>
-    // <option value="Maryland">Maryland</option>
-    // <option value="Massachusettes">Massachusettes</option>
-    // <option value="Michigan">Michigan</option>
-    // <option value="Minnesota">Minnesota</option>
-    // <option value="Mississippi">Mississippi</option>
-    // <option value="Missouri">Missouri</option>
-    // <option value="Montana">Montana</option>
-    // <option value="Nebraska">Nebraska</option>
-    // <option value="Nevada">Nevada</option>
-    // <option value="New Hampshire">New Hampshire</option>
-    // <option value="New Jersey">New Jersey</option>
-    // <option value="New Mexico">New Mexico</option>
-    // <option value="New York">New York</option>
-    // <option value="North Carolina">North Carolina</option>
-    // <option value="North Dakota">North Dakota</option>
-    // <option value="Ohio">Ohio</option>
-    // <option value="Oklahoma">Oklahoma</option>
-    // <option value="Oregon">Oregon</option>
-    // <option value="Pennsylvania">Pennsylvania</option>
-    // <option value="Rhode Island">Rhode Island</option>
-    // <option value="South Carolina">South Carolina</option>
-    // <option value="South Dakota">South Dakota</option>
-    // <option value="Tennessee">Tennessee</option>
-    // <option value="Texas">Texas</option>
-    // <option value="Utah">Utah</option>
-    // <option value="Vermont">Vermont</option>
-    // <option value="Virginia">Virginia</option>
-    // <option value="Washington">Washington</option>
-    // <option value="West Virginia">West Virginia</option>
-    // <option value="Wisconsin">Wisconsin</option>
-    // <option value="Wyoming">Wyoming</option>
-    // </select>
-    // <input type="text" class="form-elements" placeholder="Zip Code">
-    // <input type="text" class="form-elements" placeholder="Phone Number">
-    // <input type="text" class="form-elements" placeholder="Email">
-    // <div class="form-elements" id="card-image"></div>
-    // <input type="text" class="form-elements" id="credit-card" placeholder="Credit Card Number">
-    // <input type="text" class="form-elements" id="exp-date" placeholder="Expiration MM/YYYY">
-    // <input type="text" class="form-elements" id="cvv" placeholder="CVV">
-
-    // <input type="button" class="form-elements" id="process-btn" value="Process Payment">
-    //     `
-    // };
-
-
 }
+
 
 
 let checkout = new Checkout();
 checkout.processPayment();
-
-// let proceed = document.querySelector("#proceed");
-// console.log(proceed);

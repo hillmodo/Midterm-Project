@@ -11,21 +11,27 @@
 <body>
     <header></header>
     <div class="checkout-parent">
-        <div class="payment payment-type">
+        <div class="payment" id="payment-type">
             <div class="payment-type-elem">Please Select Your Payment Type</div>
             <input type="radio" class="payment-type-elem" name="type" value="cash">Cash<br>
             <input type="radio" class="payment-type-elem" name="type" value="credit-card">Credit Card
             <input type="button" class="payment-type-elem" id="proceed" value="Proceed">
         </div>
-        <div class="payment cash-form">
-            <div>hey</div>
-        </div>
-        <ul class="payment checkout-form">
+        <div class="payment" id="cash-form">
             <div class="order-summary">
-                <div id="summary">Order Summary</div>
-                <div id="subtotal"></div>
-                <div id="sales-tax"></div>
-                <div id="total"></div>
+                <div class="summary">Order Summary</div>
+                <div class="subtotal"></div>
+                <div class="sales-tax"></div>
+                <div class="total"></div>
+            </div>
+            <input type="button" class="form-elements" id="process-btn" value="Process Payment">
+        </div>
+        <ul class="payment" id="credit-form">
+            <div class="order-summary">
+                <div class="summary">Order Summary</div>
+                <div class="subtotal"></div>
+                <div class="sales-tax"></div>
+                <div class="total"></div>
             </div>
             <input type="text" class="form-elements" id="name" placeholder="Full Name">
             <input type="text" class="form-elements" id="street-address" placeholder="Street Address">
@@ -82,15 +88,23 @@
                         <option value="Wisconsin">Wisconsin</option>
                         <option value="Wyoming">Wyoming</option>
                         </select>
-            <input type="text" class="form-elements" placeholder="Zip Code">
-            <input type="text" class="form-elements" placeholder="Phone Number">
-            <input type="text" class="form-elements" placeholder="Email">
+            <input type="text" class="form-elements" id="zipcode" placeholder="Zip Code">
+            <input type="text" class="form-elements" id="phone" placeholder="Phone Number">
+            <input type="text" class="form-elements" id="email" placeholder="Email">
             <div class="form-elements" id="card-image"></div>
             <input type="text" class="form-elements" id="credit-card" placeholder="Credit Card Number">
             <input type="text" class="form-elements" id="exp-date" placeholder="Expiration MM/YYYY">
             <input type="text" class="form-elements" id="cvv" placeholder="CVV">
-
-            <input type="button" class="form-elements" id="process-btn" value="Process Payment">
+            <input type="button" class="form-elements" id="process-btn2" value="Process Payment">
+        </ul>
+        <ul class="payment" id="receipt">
+            <div id="contact-info"></div>
+            <div class="order-summary">
+                <div class="summary">Order Summary</div>
+                <div class="subtotal"></div>
+                <div class="sales-tax"></div>
+                <div class="total"></div>
+            </div>
         </ul>
     </div>
     <div class="menu">
@@ -137,17 +151,13 @@
         <div id="cart-header">Your Cart</div>
     </div>
     <div class="cart" id="calculator">
-        <div id="subtotal">SUBTOTAL</div>
-        <div id="sales-tax">Sales Tax:</div>
-        <div id="total">Total:</div>
+        <div class="subtotal">Subtotal:</div>
+        <div class="sales-tax">Sales Tax:</div>
+        <div class="total">Total:</div>
         <input type="button" id="checkout" value="CHECKOUT">
 
 
     </div>
-    <!-- <footer><a href="" class="company-info" id="about-us">About Us</a>
-        <a href="" class="company-info" id="career-ops">Career Opportunities</a>
-        <a href="" class="company-info" id="contact-us">Contact Us</a>
-    </footer> -->
 
     <script src="index.js"></script>
 </body>
