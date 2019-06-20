@@ -24,18 +24,19 @@
         <div class="payment" id="cash-form">
             <div class="order-summary">
                 <div class="summary">Order Summary</div>
-                <div class="subtotal"></div>
-                <div class="sales-tax"></div>
-                <div class="total"></div>
+                <div class="subtotal" id="cash-sub"></div>
+                <div class="sales-tax" id="cash-tax"></div>
+                <div class="total" id="cash-total"></div>
+                <input id="tender" type="text" name="tender" value="Enter Cash Amount">
             </div>
-            <input type="button" class="form-elements" id="process-btn" value="Process Payment">
+            <input type="button" class="form-elements" id="cash-process-btn" value="Process Payment">
         </div>
         <ul class="payment" id="credit-form">
             <div class="order-summary">
                 <div class="summary">Order Summary</div>
-                <div class="subtotal"></div>
-                <div class="sales-tax"></div>
-                <div class="total"></div>
+                <div class="subtotal" id="credit-sub"></div>
+                <div class="sales-tax" id="credit-tax"></div>
+                <div class="total" id="credit-total"></div>
             </div>
             <input type="text" class="form-elements" id="name" placeholder="Full Name">
             <input type="text" class="form-elements" id="street-address" placeholder="Street Address">
@@ -99,7 +100,7 @@
             <input type="text" class="form-elements" id="credit-card" placeholder="Credit Card Number">
             <input type="text" class="form-elements" id="exp-date" placeholder="Expiration MM/YYYY">
             <input type="text" class="form-elements" id="cvv" placeholder="CVV">
-            <input type="button" class="form-elements" id="process-btn2" value="Process Payment">
+            <input type="button" class="form-elements" id="credit-process-btn" value="Process Payment">
         </ul>
         <ul class="payment" id="receipt">
             <div id="contact-info"></div>
@@ -153,16 +154,19 @@
 
 
 
-    <div class="cart" id="shopping-cart">Your Cart
+    <div class="cart" id="shopping-cart">
         <div id="cart-header">Your Cart</div>
-    </div>
-    <div class="cart" id="calculator">
-        <div class="subtotal">Subtotal:</div>
-        <div class="sales-tax">Sales Tax:</div>
-        <div class="total">Total:</div>
-        <input type="button" id="checkout" value="CHECKOUT">
-
-
+    
+        <div class="cart" id="calculator">
+            <div class="subtotal">SUBTOTAL</div>
+            <div class="sales-tax">
+                <!-- Sales Tax: -->
+            </div>
+            <div class="total">
+                <!-- Total: -->
+            </div> 
+            <input type="button" id="checkout" value="CHECKOUT">
+        </div>
     </div>
 
     <script src="index.js"></script>
