@@ -56,11 +56,12 @@ header>img {
     width: 70%;
 }
 
+
 .item-price {
     width: 30%;
 }
 
-.subtotal {
+.subtotal{
     margin: 5px;
     font-size: 30px;
     height: 60px;
