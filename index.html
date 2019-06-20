@@ -15,12 +15,14 @@
         <img src="./vacatuslogo.png">
     </header>
     <div class="checkout-parent">
-        <div class="payment" id="payment-type">
-            <div class="payment-type-elem">Please Select Your Payment Type</div>
-            <input type="radio" class="payment-type-elem" name="type" value="cash">Cash<br>
-            <input type="radio" class="payment-type-elem" name="type" value="credit-card">Credit Card
-            <input type="button" class="payment-type-elem" id="proceed" value="Proceed">
-        </div>
+        <ul class="payment" id="payment-type">
+            <li>
+                <div class="payment-header payment-type-elem">Please Select Your Payment Type</div>
+            </li>
+            <li><input type="radio" class="payment-type-elem" name="type" value="cash">Cash<br></li>
+            <li><input type="radio" class="payment-type-elem" name="type" value="credit-card">Credit Card</li>
+            <input type="button" class="payment-type-elem" id="proceed" value="PROCEED">
+        </ul>
         <div class="payment" id="cash-form">
             <div class="order-summary">
                 <div class="summary">Order Summary</div>
@@ -109,6 +111,7 @@
                 <div class="subtotal"></div>
                 <div class="sales-tax"></div>
                 <div class="total"></div>
+                <button id="close">Close</button>
             </div>
         </ul>
     </div>
@@ -156,17 +159,11 @@
 
     <div class="cart" id="shopping-cart">
         <div id="cart-header">Your Cart</div>
-    
-        <div class="cart" id="calculator">
-            <div class="subtotal">SUBTOTAL</div>
-            <div class="sales-tax">
-                <!-- Sales Tax: -->
-            </div>
-            <div class="total">
-                <!-- Total: -->
-            </div> 
+        <div id="cart-display"></div>
+        <footer class="cart" id="calculator">
+            <div class="subtotal">Subtotal:</div>
             <input type="button" id="checkout" value="CHECKOUT">
-        </div>
+        </footer>
     </div>
 
     <script src="index.js"></script>

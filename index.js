@@ -29,16 +29,16 @@ class Package {
 
     //Displays standard package in cart area
     displayInCart() {
-        const cartElem = document.querySelector("#shopping-cart");
+        const cartElem = document.querySelector("#cart-display");
         const selectedCartElem = document.createElement("div");
 
         selectedCartElem.id = "pkg-in-cart";
 
 
-        selectedCartElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.name + '</div>' ); 
-        selectedCartElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.price + '</div>');
-        
-        
+        selectedCartElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.name + '</div>');
+        selectedCartElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.price + '</div>');
+
+
         // attempt to push price into subtotal array//
         cartObject.price = this.price;
         console.log(cartObject);
@@ -66,7 +66,7 @@ class Package {
         // const addOnElem = document.createElement("form");
         // addOnElem.className = "addOnForm";
 
-        packageElem.insertAdjacentHTML('beforeend','<h3 class="add-on-title">Upgrade Your Package!</h3>');
+        packageElem.insertAdjacentHTML('beforeend', '<h3 class="add-on-title">Upgrade Your Package!</h3>');
         packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="flight">' + this.flightAddOn + " $" + this.flightAddOnPrice + '<br>');
         packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="hotel">' + this.hotelAddOn + " $" + this.hotelAddOnPrice + '<br>');
         packageElem.insertAdjacentHTML('beforeend', '<input class="add-on-input" type="checkbox" name="event">' + this.eventAddOn + " $" + this.eventAddOnPrice + '<br>');
@@ -89,33 +89,33 @@ class Package {
 
     //Displays additional package options in cart area
     displayAddOnInCart(addOnType) {
-        const cartElem = document.querySelector(".cart");
+        const cartElem = document.querySelector("#cart-display");
         const pkgElem = document.querySelector("#pkg-in-cart");
-        
+
 
 
 
         if (addOnType === this.flightAddOn) {
-            
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.flightAddOn + '</div>' ); 
-            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.flightAddOnPrice + '</div>');
-            
+
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.flightAddOn + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.flightAddOnPrice + '</div>');
+
         }
 
         if (addOnType === this.hotelAddOn) {
-            
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.hotelAddOn + '</div>' ); 
-            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.hotelAddOnPrice + '</div>');
-            
+
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.hotelAddOn + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.hotelAddOnPrice + '</div>');
+
         }
 
         if (addOnType === this.eventAddOn) {
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.eventAddOn + '</div>' ); 
-            pkgElem.insertAdjacentHTML('beforeend','<div class="item-price">'+ ' $' + this.eventAddOnPrice + '</div>');
-            
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.eventAddOn + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.eventAddOnPrice + '</div>');
+
         }
 
-        
+
         cartElem.appendChild(pkgElem);
 
     }
@@ -150,7 +150,6 @@ class Package {
 
         if (addOnType === this.flightAddOn) {
             cartObject.flight = this.flightAddOnPrice;
-
             this.isFlightAddOnSelected = true;
 
         }
@@ -215,11 +214,16 @@ class Package {
 
     calculator() {
         let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
+        console.log(subtotal);
         let packageAndFeatureTotal = document.getElementsByClassName("subtotal");
+        console.log(packageAndFeatureTotal);
+        for (let i = 0; i < packageAndFeatureTotal.length; i++) {
+            packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`
+        };
         // packageAndFeatureTotal.forEach((e) => {
-        // packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`;
-        // })
-        packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}.00`;
+        //     packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`;
+        // });
+        // packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}.00`;
         let tax = subtotal * .09;
         let salesTax = document.getElementsByClassName("sales-tax");
         salesTax.innerHTML = `Sales Tax: $${tax}`;
@@ -289,7 +293,6 @@ packageOneSelector.addEventListener("click", function(e) {
     if (e.target.matches('#package-one')) {
 
         if (!testPackage.isPackageSelected) {
-
             testPackage.displayInCart();
             testPackage.displayAddOnsInPackage("pkg-one-details");
             testPackage.select("package");
@@ -321,7 +324,6 @@ packageOneSelector.addEventListener("click", function(e) {
 
 
         if (!testPackage.isFlightAddOnSelected) {
-
             testPackage.AddOnSelected(testPackage.flightAddOn);
             testPackage.displayAddOnInCart(testPackage.flightAddOn);
         } else {
@@ -522,6 +524,8 @@ class Checkout {
         const cashProcess = document.getElementById("cash-process-btn");
         const creditProcess = document.getElementById("credit-process-btn");
         let contanctInfo = document.getElementById("contact-info");
+        const close = document.getElementById("close");
+        console.log(close);
         let subTotalDiv = "";
         let salesTaxDiv = "";
         let totalDiv = ""; 
@@ -577,7 +581,7 @@ class Checkout {
             receipt.style = "visibility: inherit;";
             console.log(cartObject);
 
-        })
+        });
 
         creditProcess.addEventListener("click", (e) => {
             let nameInput = document.getElementById("name").value;
@@ -607,12 +611,14 @@ class Checkout {
             <div>***</div>
             `;
 
-        })
+        });
 
+        close.addEventListener("click", (e) => {
+            receipt.style = "visibility: hidden;";
+        });
 
     }
 }
-
 
 
 let checkout = new Checkout();
