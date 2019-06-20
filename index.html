@@ -25,13 +25,13 @@
         </ul>
         <div class="payment" id="cash-form">
             <div class="order-summary">
-                <div class="summary">Order Summary</div>
-                <div class="subtotal" id="cash-sub"></div>
-                <div class="sales-tax" id="cash-tax"></div>
-                <div class="total" id="cash-total"></div>
-                <input id="tender" type="text" name="tender" value="Enter Cash Amount">
+                <div class="cash summary">Order Summary</div>
+                <div class="cash subtotal" id="cash-sub"></div>
+                <div class="cash sales-tax" id="cash-tax"></div>
+                <div class="cash total" id="cash-total"></div>
+                <input class="cash" id="tender" type="text" name="tender" placeholder="Enter Cash Amount">
             </div>
-            <input type="button" class="form-elements" id="cash-process-btn" value="Process Payment">
+            <input type="button" class="form-elements btn" id="cash-process-btn" value="Process Payment">
         </div>
         <ul class="payment" id="credit-form">
             <div class="order-summary">
@@ -102,15 +102,17 @@
             <input type="text" class="form-elements" id="credit-card" placeholder="Credit Card Number">
             <input type="text" class="form-elements" id="exp-date" placeholder="Expiration MM/YYYY">
             <input type="text" class="form-elements" id="cvv" placeholder="CVV">
-            <input type="button" class="form-elements" id="credit-process-btn" value="Process Payment">
+            <input type="button" class="form-elements btn" id="credit-process-btn" value="Process Payment">
         </ul>
         <ul class="payment" id="receipt">
-            <div id="contact-info"></div>
+            <div id="thanks">Thank you for your order!</div>
             <div class="order-summary">
                 <div class="summary">Order Summary</div>
-                <div class="subtotal"></div>
-                <div class="sales-tax"></div>
-                <div class="total"></div>
+                <div class="subtotal" id="receipt-sub"></div>
+                <div class="sales-tax" id="receipt-tax"></div>
+                <div class="total" id="receipt-total"></div>
+                <div id="client-change"></div>
+                <div id="contact-info"></div>
                 <button id="close">Close</button>
             </div>
         </ul>
@@ -160,10 +162,12 @@
     <div class="cart" id="shopping-cart">
         <div id="cart-header">Your Cart</div>
         <div id="cart-display"></div>
-        <footer class="cart" id="calculator">
-            <div class="subtotal">Subtotal:</div>
+        <div class="cart" id="calculator">
+            <div class="cart-subtotal">Subtotal:</div>
             <input type="button" id="checkout" value="CHECKOUT">
-        </footer>
+
+        </div>
+
     </div>
 
     <script src="index.js"></script>

@@ -41,7 +41,6 @@ class Package {
 
         // attempt to push price into subtotal array//
         cartObject.price = this.price;
-        console.log(cartObject);
         cartElem.appendChild(selectedCartElem);
 
 
@@ -94,18 +93,17 @@ class Package {
 
 
 
-
         if (addOnType === this.flightAddOn) {
 
             pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.flightAddOn + '</div>');
             pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.flightAddOnPrice + '</div>');
-
         }
 
         if (addOnType === this.hotelAddOn) {
 
             pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.hotelAddOn + '</div>');
             pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.hotelAddOnPrice + '</div>');
+
 
         }
 
@@ -214,22 +212,10 @@ class Package {
 
     calculator() {
         let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
-        console.log(subtotal);
-        let packageAndFeatureTotal = document.getElementsByClassName("subtotal");
-        console.log(packageAndFeatureTotal);
-        for (let i = 0; i < packageAndFeatureTotal.length; i++) {
-            packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`
-        };
-        // packageAndFeatureTotal.forEach((e) => {
-        //     packageAndFeatureTotal.innerHTML = `Subtotal: ${subtotal}`;
-        // });
-        // packageAndFeatureTotal.innerHTML = `Subtotal: $${subtotal}.00`;
+        let packageAndFeatureTotal = document.querySelector(".cart-subtotal");
+        packageAndFeatureTotal.innerHTML = `<div class="cart-subtotal">Subtotal: $${subtotal}</div>`;
         let tax = subtotal * .09;
-        let salesTax = document.getElementsByClassName("sales-tax");
-        salesTax.innerHTML = `Sales Tax: $${tax}`;
         let grandTotal = subtotal + tax;
-        let total = document.getElementsByClassName("total");
-        total.innerHTML = `Total: $${grandTotal}`;
     }
 
 }
@@ -524,14 +510,14 @@ class Checkout {
         const cashProcess = document.getElementById("cash-process-btn");
         const creditProcess = document.getElementById("credit-process-btn");
         let contanctInfo = document.getElementById("contact-info");
+        let clientChange = document.getElementById("client-change");
         const close = document.getElementById("close");
-        console.log(close);
         let subTotalDiv = "";
         let salesTaxDiv = "";
-        let totalDiv = ""; 
+        let totalDiv = "";
 
-       
-        
+
+
         this.checkoutButton.addEventListener("click", (e) => {
             paymentType.style = "visibility: inherit;";
         });
@@ -542,15 +528,14 @@ class Checkout {
             let grandTotal = subtotal + tax;
 
             let type = document.querySelector('input[name="type"]:checked').value;
-            console.log(type);
             if (type === "cash") {
                 subTotalDiv = document.getElementById("cash-sub");
                 salesTaxDiv = document.getElementById("cash-tax");
                 totalDiv = document.getElementById("cash-total");
                 paymentType.style = "visibility: hidden;";
                 cashForm.style = "visibility: inherit;";
-                
-               
+
+
             } else if (type === "credit-card") {
                 subTotalDiv = document.getElementById("credit-sub");
                 salesTaxDiv = document.getElementById("credit-tax");
@@ -558,32 +543,42 @@ class Checkout {
 
                 paymentType.style = "visibility: hidden;";
                 creditForm.style = "visibility: inherit;";
-               
+
             }
 
-            subTotalDiv.insertAdjacentText('beforeend',"Subtotal: $"+subtotal);
-            salesTaxDiv.insertAdjacentText('beforeend',"Tax: $"+tax);
-            totalDiv.insertAdjacentText('beforeend',"Subtotal: $"+grandTotal);
+            subTotalDiv.insertAdjacentText('beforeend', "Subtotal: $" + subtotal + ".00");
+            salesTaxDiv.insertAdjacentText('beforeend', "Tax: $" + tax);
+            totalDiv.insertAdjacentText('beforeend', "Total: $" + grandTotal);
         });
 
         cashProcess.addEventListener("click", (e) => {
             let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
             let tax = subtotal * .09;
             let grandTotal = subtotal + tax;
-
             let cashTender = document.querySelector('input[name="tender"]').value;
+            let cashTenderInt = parseInt(cashTender);
+            let change = cashTenderInt - grandTotal;
+            let changeOutput = change.toFixed(2);
 
-            subTotalDiv = document.getElementById("cash-sub");
-            salesTaxDiv = document.getElementById("cash-tax");
-            totalDiv = document.getElementById("cash-total");
+            subTotalDiv = document.getElementById("receipt-sub");
+            salesTaxDiv = document.getElementById("receipt-tax");
+            totalDiv = document.getElementById("receipt-total");
+            subTotalDiv.insertAdjacentText('beforeend', "Subtotal: $" + subtotal + ".00");
+            salesTaxDiv.insertAdjacentText('beforeend', "Tax: $" + tax);
+            totalDiv.insertAdjacentText('beforeend', "Total: $" + grandTotal);
 
             cashForm.style = "visibility: hidden;";
-            receipt.style = "visibility: inherit;";
+            receipt.style = "visibility: inherit; height: 350px;";
             console.log(cartObject);
+            clientChange.innerHTML = `
+            <div>Your change is $${changeOutput}!</div>`
 
         });
 
         creditProcess.addEventListener("click", (e) => {
+            let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
+            let tax = subtotal * .09;
+            let grandTotal = subtotal + tax;
             let nameInput = document.getElementById("name").value;
             let address = document.getElementById("street-address").value;
             let city = document.getElementById("city").value;
@@ -594,10 +589,18 @@ class Checkout {
             let creditCard = document.getElementById("credit-card").value;
             let expiration = document.getElementById("exp-date").value;
             let cvv = document.getElementById("cvv").value;
+
+            subTotalDiv = document.getElementById("receipt-sub");
+            salesTaxDiv = document.getElementById("receipt-tax");
+            totalDiv = document.getElementById("receipt-total");
+            subTotalDiv.insertAdjacentText('beforeend', "Subtotal: $" + subtotal + ".00");
+            salesTaxDiv.insertAdjacentText('beforeend', "Tax: $" + tax);
+            totalDiv.insertAdjacentText('beforeend', "Total: $" + grandTotal);
+
             creditForm.style = "visiblity: hidden;";
             receipt.style = "visibility: inherit;";
+            contanctInfo.style = "visibility: inherit;";
             contanctInfo.innerHTML = `
-            <div>Thank you for your order!</div>
             <div>Your package information and tickets will be shipped to:</div>
             <div>${nameInput}</div>
             <div>${address}</div>
@@ -614,6 +617,14 @@ class Checkout {
         });
 
         close.addEventListener("click", (e) => {
+            cartObject.price = 0;
+            cartObject.flight = 0;
+            cartObject.hotel = 0;
+            cartObject.event = 0;
+            document.querySelector("#cart-display").innerHTML = "";
+            document.getElementById("pkg-one-details").innerHTML = "";
+            document.getElementById("pkg-two-details").innerHTML = "";
+            document.getElementById("pkg-three-details").innerHTML = "";
             receipt.style = "visibility: hidden;";
         });
 

@@ -56,15 +56,14 @@ header>img {
     width: 70%;
 }
 
-
 .item-price {
     width: 30%;
 }
 
-.subtotal{
+.cart-subtotal {
     margin: 5px;
     font-size: 30px;
-    height: 60px;
+    height: 30px;
 }
 
 #calculator {
@@ -174,6 +173,22 @@ button {
 
 /* Checkout Form */
 
+.subtotal {
+    margin: 5px;
+    font-size: 30px;
+    height: 30px;
+}
+
+.sales-tax {
+    font-size: 30px;
+    height: 30px;
+}
+
+.total {
+    font-size: 30px;
+    height: 30px;
+}
+
 .payment {
     position: absolute;
     top: 50%;
@@ -217,7 +232,7 @@ button {
 .form-elements {
     display: flex;
     position: relative;
-    top: 20%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, -80%);
     width: 60%;
@@ -236,6 +251,8 @@ button {
 .summary {
     font-size: 30px;
     color: #1d4b55;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #payment-type {
@@ -244,6 +261,7 @@ button {
 
 #cash-form {
     visibility: hidden;
+    height: 350px;
 }
 
 #credit-form {
@@ -281,4 +299,38 @@ button {
     font-size: 26px;
     background-color: #1d4b55;
     color: floralwhite;
+}
+
+.cash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tender {
+    width: 60%;
+    margin: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 40px;
+    font-size: 20px;
+}
+
+
+/* receipt styling */
+
+#contact-info {
+    visibility: hidden;
+}
+
+#thanks {
+    font-size: 30px;
+    color: #FF3B3F;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+#client-change {
+    font-size: 30px;
+    margin-top: 10px;
 }
