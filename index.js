@@ -40,8 +40,8 @@ class Package {
         
         
         // attempt to push price into subtotal array//
-        cartArray.push(this.price);
-        console.log(cartArray);
+        cartObject.price = this.price;
+        console.log(cartObject);
         cartElem.appendChild(selectedCartElem);
 
 
@@ -519,35 +519,67 @@ class Checkout {
         const cashForm = document.getElementById("cash-form");
         const creditForm = document.getElementById("credit-form");
         const proceed = document.getElementById("proceed");
-        const process = document.getElementById("process-btn");
-        const process2 = document.getElementById("process-btn2");
+        const cashProcess = document.getElementById("cash-process-btn");
+        const creditProcess = document.getElementById("credit-process-btn");
         let contanctInfo = document.getElementById("contact-info");
+        let subTotalDiv = "";
+        let salesTaxDiv = "";
+        let totalDiv = ""; 
 
-
-
+       
+        
         this.checkoutButton.addEventListener("click", (e) => {
             paymentType.style = "visibility: inherit;";
         });
 
         proceed.addEventListener("click", (e) => {
+            let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
+            let tax = subtotal * .09;
+            let grandTotal = subtotal + tax;
+
             let type = document.querySelector('input[name="type"]:checked').value;
             console.log(type);
             if (type === "cash") {
+                subTotalDiv = document.getElementById("cash-sub");
+                salesTaxDiv = document.getElementById("cash-tax");
+                totalDiv = document.getElementById("cash-total");
                 paymentType.style = "visibility: hidden;";
                 cashForm.style = "visibility: inherit;";
+                
+               
             } else if (type === "credit-card") {
+                subTotalDiv = document.getElementById("credit-sub");
+                salesTaxDiv = document.getElementById("credit-tax");
+                totalDiv = document.getElementById("credit-total");
+
                 paymentType.style = "visibility: hidden;";
                 creditForm.style = "visibility: inherit;";
+               
             }
+
+            subTotalDiv.insertAdjacentText('beforeend',"Subtotal: $"+subtotal);
+            salesTaxDiv.insertAdjacentText('beforeend',"Tax: $"+tax);
+            totalDiv.insertAdjacentText('beforeend',"Subtotal: $"+grandTotal);
         });
 
-        process.addEventListener("click", (e) => {
+        cashProcess.addEventListener("click", (e) => {
+            let subtotal = cartObject.price + cartObject.flight + cartObject.hotel + cartObject.event;
+            let tax = subtotal * .09;
+            let grandTotal = subtotal + tax;
+
+            let cashTender = document.querySelector('input[name="tender"]').value;
+
+            subTotalDiv = document.getElementById("cash-sub");
+            salesTaxDiv = document.getElementById("cash-tax");
+            totalDiv = document.getElementById("cash-total");
+
             cashForm.style = "visibility: hidden;";
             receipt.style = "visibility: inherit;";
+            console.log(cartObject);
 
         })
 
-        process2.addEventListener("click", (e) => {
+        creditProcess.addEventListener("click", (e) => {
             let nameInput = document.getElementById("name").value;
             let address = document.getElementById("street-address").value;
             let city = document.getElementById("city").value;
