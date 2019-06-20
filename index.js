@@ -53,6 +53,10 @@ class Package {
         // while (removeCartElem.hasChildNodes()){
         //     removeCartElem.removeChild(removeCartElem.firstChild);
         // }
+        cartObject.price = 0;
+        cartObject.flight = 0;
+        cartObject.hotel = 0;
+        cartObject.event = 0;
         removeCartElem.remove();
 
     }
@@ -95,21 +99,21 @@ class Package {
 
         if (addOnType === this.flightAddOn) {
 
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.flightAddOn + '</div>');
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.flightAddOnPrice + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name" id="flight-add">' + this.flightAddOn + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price" id="flight-add-price">' + ' $' + this.flightAddOnPrice + '</div>');
         }
 
         if (addOnType === this.hotelAddOn) {
 
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.hotelAddOn + '</div>');
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.hotelAddOnPrice + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name" id="hotel-add">' + this.hotelAddOn + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price" id="hotel-add-price">' + ' $' + this.hotelAddOnPrice + '</div>');
 
 
         }
 
         if (addOnType === this.eventAddOn) {
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name">' + this.eventAddOn + '</div>');
-            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price">' + ' $' + this.eventAddOnPrice + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-name" id="event-add">' + this.eventAddOn + '</div>');
+            pkgElem.insertAdjacentHTML('beforeend', '<div class="item-price" id="event-add-price">' + ' $' + this.eventAddOnPrice + '</div>');
 
         }
 
@@ -120,19 +124,23 @@ class Package {
 
     removeAddOnFromCart(addOnType) {
         let removedAddOn = null;
+        let removedAddOnPrice = null;
 
         if (addOnType === this.flightAddOn) {
             removedAddOn = document.querySelector("#flight-add");
+            removedAddOnPrice = document.querySelector("#flight-add-price");
             cartObject.flight = 0;
         }
 
         if (addOnType === this.hotelAddOn) {
             removedAddOn = document.querySelector("#hotel-add");
+            removedAddOnPrice = document.querySelector("#hotel-add-price");
             cartObject.hotel = 0;
         }
 
         if (addOnType === this.eventAddOn) {
             removedAddOn = document.querySelector("#event-add");
+            removedAddOnPrice = document.querySelector("#event-add-price");
             cartObject.event = 0;
         }
 
@@ -140,6 +148,8 @@ class Package {
         //     removedAddOn.removeChild(removedAddOn.firstChild);
         // }
         removedAddOn.remove();
+        removedAddOnPrice.remove();
+        
 
     }
 
@@ -279,11 +289,6 @@ packageOneSelector.addEventListener("click", function(e) {
     if (e.target.matches('#package-one')) {
 
         if (!testPackage.isPackageSelected) {
-            testPackage.displayInCart();
-            testPackage.displayAddOnsInPackage("pkg-one-details");
-            testPackage.select("package");
-
-
             if (testPackage2.isPackageSelected) {
                 testPackage2.removeFromCart();
                 testPackage2.deselect("package");
@@ -295,6 +300,10 @@ packageOneSelector.addEventListener("click", function(e) {
                 testPackage3.deselect("package");
                 testPackage3.hideAddOnPackage("pkg-three-details");
             }
+
+            testPackage.displayInCart();
+            testPackage.displayAddOnsInPackage("pkg-one-details");
+            testPackage.select("package");
 
 
         } else {
@@ -354,10 +363,6 @@ packageTwoSelector.addEventListener("click", function(e) {
 
         if (!testPackage2.isPackageSelected) {
 
-            testPackage2.displayInCart();
-            testPackage2.displayAddOnsInPackage("pkg-two-details")
-            testPackage2.select("package");
-
             if (testPackage.isPackageSelected) {
                 testPackage.removeFromCart();
                 testPackage.deselect("package");
@@ -369,6 +374,10 @@ packageTwoSelector.addEventListener("click", function(e) {
                 testPackage3.deselect("package");
                 testPackage3.hideAddOnPackage("pkg-three-details");
             }
+
+            testPackage2.displayInCart();
+            testPackage2.displayAddOnsInPackage("pkg-two-details")
+            testPackage2.select("package");
 
 
         } else {
@@ -428,10 +437,6 @@ packageThreeSelector.addEventListener("click", function(e) {
     if (e.target.matches('#package-three')) {
         if (!testPackage3.isPackageSelected) {
 
-            testPackage3.displayInCart();
-            testPackage3.displayAddOnsInPackage("pkg-three-details")
-            testPackage3.select("package");
-
             if (testPackage.isPackageSelected) {
                 testPackage.removeFromCart();
                 testPackage.deselect("package");
@@ -443,6 +448,11 @@ packageThreeSelector.addEventListener("click", function(e) {
                 testPackage2.deselect("package");
                 testPackage2.hideAddOnPackage("pkg-two-details");
             }
+
+            testPackage3.displayInCart();
+            testPackage3.displayAddOnsInPackage("pkg-three-details")
+            testPackage3.select("package");
+
 
 
         } else {
